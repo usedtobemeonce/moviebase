@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Russo+One');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,7 +15,7 @@ body {
   color: #fff;
   margin: 0;
   padding: 0;
-  font-family: 'Russo One', sans-serif;
+  font-family: 'Oswald', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

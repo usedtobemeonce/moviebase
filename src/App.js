@@ -1,45 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { Suspense, useState } from "react";
 import styled from 'styled-components';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
-import Header from "./components/Header";
-import Search from "./components/Search";
+import Header from "./components/header/Header";
+import Home from './components/home/Home';
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 15% 1fr 15%;
-  grid-gap: 10px;
-  grid-template-areas: "header header header" 
-                       ". main ." 
-                       "footer footer footer";
-  justify-content: center;
+    display: grid;
+    grid-template-areas: 
+      "header header header" 
+      ". main ." 
+      "footer footer footer";
+    grid-template-rows: 70px 1fr 70px;
+    grid-template-columns: 20% 1fr 20%;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    height: 100vh;
+    margin: 0;
+    @media (max-width: 769px) {
+        grid-template-areas: 
+        "header" 
+        "main" 
+        "footer";
+        grid-template-rows: 80px 1fr 70px 1fr 70px;
+        grid-template-columns: 1fr;
+    }
 `;
 
 const Main = styled.main`
   grid-area: main;
-  height: calc(100vh - 270px);
 `;
 
 const Footer = styled.footer`
   grid-area: footer;
 `;
 
-const App = () => {
+const app = () => {
 
-  const handleSearch = title => {
-    console.log('searching...', title);
-  }
+  const routes = (
+    <Switch>
+      <Route exact path='/' component={Home} />
+      {/* <Route exact path='/movie' component={Movie} /> */}
+      <Redirect to="/" />
+    </Switch>
+  );
 
   return (
-    <Container className="container">
+    <Container>
       <Header />
       <Main>
-        <Search onSearch={handleSearch} />
+        <Suspense fallback='Loading movies'>
+          {routes}
+        </Suspense>
       </Main>
-      <Footer>
-        moviebase © 2019
-      </Footer>
+      <Footer>moviebase © 2019</Footer>
     </Container>
   );
 }
 
-export default App;
+export default withRouter(app);
