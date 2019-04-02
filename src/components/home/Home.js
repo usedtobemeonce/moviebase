@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Search from "../search/Search";
-import Results from "../search/Results";
+import Search from "../Search/Search";
+import Results from "../Search/Results";
 
 const home = props => {
 

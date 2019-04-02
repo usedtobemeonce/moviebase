@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import Header from "./components/AppBar/AppBar";
-import Home from './components/home/Home';
+import Home from './components/Home/Home';
 
 const Container = styled.div`
     display: grid;

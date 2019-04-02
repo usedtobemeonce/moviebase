@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import List from './List/List';
-import Heading from '../ui/Heading';
+import Heading from '../UI/Heading';
 
 export default function ({ searchTitle }) {
     const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
