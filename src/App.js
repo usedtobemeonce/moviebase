@@ -2,7 +2,7 @@ import React, { Suspense, useState } from "react";
 import styled from 'styled-components';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
-import Header from "./components/header/Header";
+import Header from "./components/AppBar/AppBar";
 import Home from './components/home/Home';
 
 const Container = styled.div`
