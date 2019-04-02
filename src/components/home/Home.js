@@ -14,7 +14,7 @@ const home = props => {
     return (
         <>
             <Search onSearch={handleSearch} />
-            <Results searchTitle={searchTitle} />
+            <Results {...props} searchTitle={searchTitle} />
         </>
     );
 }

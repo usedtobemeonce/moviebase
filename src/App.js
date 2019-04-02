@@ -1,9 +1,13 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useContext, useReducer } from "react";
 import styled from 'styled-components';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
+import Context from './context';
+import reducer from './reducer';
 import Header from "./components/AppBar/AppBar";
+import Footer from "./components/Footer/Footer";
 import Home from './components/Home/Home';
+import Movie from './components/Movie/Movie';
 
 const Container = styled.div`
     display: grid;
@@ -11,8 +15,8 @@ const Container = styled.div`
       "header header header" 
       ". main ." 
       "footer footer footer";
-    grid-template-rows: 70px 1fr 70px;
-    grid-template-columns: 20% 1fr 20%;
+    grid-template-rows: 70px 1fr 300px;
+    grid-template-columns: 25% 1fr 25%;
     grid-row-gap: 10px;
     grid-column-gap: 10px;
     height: 100vh;
@@ -31,23 +35,24 @@ const Main = styled.main`
   grid-area: main;
 `;
 
-const Footer = styled.footer`
-  grid-area: footer;
-`;
+const app = props => {
 
-const app = () => {
+  const initialState = useContext(Context);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const routes = (
-    <Switch>
-      <Route exact path='/' component={Home} />
-      {/* <Route exact path='/movie' component={Movie} /> */}
-      <Redirect to="/" />
-    </Switch>
+    <Context.Provider value={{ state, dispatch }}>
+      <Switch>
+        <Route exact path='/' component={Home} {...props} />
+        <Route exact path='/movie/:movieId' component={Movie} {...props} />
+        <Redirect to="/" />
+      </Switch>
+    </Context.Provider>
   );
 
   return (
     <Container>
-      <Header />
+      <Header {...props} />
       <Main>
         <Suspense fallback='Loading movies'>
           {routes}

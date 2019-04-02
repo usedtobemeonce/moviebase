@@ -12,10 +12,15 @@ const AppBar = styled.header`
     text-align: center;
 `;
 
-const appBar = () => {
+const appBar = ({ history }) => {
+
+    const handleClick = () => {
+        history.push('/');
+    }
+
     return (
         <AppBar>
-            <h2>movie<span style={{ color: '#03A9F4' }}>base</span></h2>
+            <h2 onClick={handleClick}>movie<span style={{ color: '#03A9F4' }}>base</span></h2>
         </AppBar>
     )
 }
