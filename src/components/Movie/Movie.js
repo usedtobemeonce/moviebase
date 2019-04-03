@@ -11,32 +11,46 @@ import {
 
 import Image from '../UI/Image';
 import Heading from '../UI/Heading';
+import { numberWithCommas } from '../../util/helper';
 
 const MovieContainer = styled.div`
     height: auto;
     display: grid;
     grid-template-columns: minmax(auto, 450px) 1fr;
-    grid-template-areas: "image info";
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+        "image movieDetails"
+        "stats stats";
     grid-gap: 10px;
     @media (max-width: 769px) {
         grid-template-areas: 
             "image"
-            "info";
+            "movieDetails"
+            "stats";
         justify-content: center;
     }
 `;
 
 const MovieDetails = styled.div`
-    grid-area: info;
+    grid-area: movieDetails;
     padding: 20px 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto) 1fr;
+    align-items: end;
 `;
 
 const Overview = styled.p`
     font-size: calc(12px + .4vw);
 `;
 
-const TableHead = styled(Table.Head)`
-    background-color: #212121 !important;
+const Genres = styled.div`
+    cursor: pointer;
+    align-self: end !important;
+`;
+
+const Stats = styled.div`
+    grid-area: stats;
 `;
 
 export default function ({ match, history }) {
@@ -65,10 +79,20 @@ export default function ({ match, history }) {
         try {
             const { data } = await axios.get(`${GET_MOVIE_DETAILS_URL}${movieId}?api_key=${API_KEY}`);
             setMovieDetails(data);
-            // console.log(data);
+            console.log(data);
         } catch (error) {
             console.error('Error getting movie details', error);
         }
+    }
+
+    const getLanguages = languagesList => {
+        const languages = languagesList.map(language => language.name).join(', ');
+        return languages;
+    }
+
+    const getCountries = countriesList => {
+        const countries = countriesList.map(country => country.name).join(', ');
+        return countries;
     }
 
     let content = (
@@ -88,30 +112,48 @@ export default function ({ match, history }) {
                 <MovieDetails>
                     <Heading big>{movieDetails.title}</Heading>
                     <Heading>{movieDetails.tagline}</Heading>
-                    <div>
+                    <Genres>
                         {movieDetails.genres.map(genre => (
                             <Badge key={genre.id} margin={5} color="green" isSolid>{genre.name}</Badge>
                         ))}
-                    </div>
+                    </Genres>
                     <Overview>{movieDetails.overview}</Overview>
+                </MovieDetails>
+                <Stats>
+                    <Heading>Stats for nerds</Heading>
                     <Table>
-                        <TableHead>
-                            <Table.TextHeaderCell>Status</Table.TextHeaderCell>
-                            <Table.TextHeaderCell>Release Date</Table.TextHeaderCell>
-                            <Table.TextHeaderCell>Budge</Table.TextHeaderCell>
-                        </TableHead>
                         <Table.Body>
                             <Table.Row>
+                                <Table.TextCell>Status</Table.TextCell>
                                 <Table.TextCell>{movieDetails.status}</Table.TextCell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.TextCell>Release Date</Table.TextCell>
                                 <Table.TextCell>{movieDetails.release_date}</Table.TextCell>
-                                <Table.TextCell>
-                                    <Icon icon="dollar" color="green" marginRight={5} />
-                                    {movieDetails.budget}
-                                </Table.TextCell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.TextCell>Budget</Table.TextCell>
+                                <Table.TextCell>{numberWithCommas(movieDetails.budget)}</Table.TextCell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.TextCell>Revenue</Table.TextCell>
+                                <Table.TextCell>{numberWithCommas(movieDetails.revenue)}</Table.TextCell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.TextCell>Languages</Table.TextCell>
+                                <Table.TextCell>{getLanguages(movieDetails.spoken_languages)}</Table.TextCell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.TextCell>Runtime</Table.TextCell>
+                                <Table.TextCell>{movieDetails.runtime} minutes</Table.TextCell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.TextCell>Countries</Table.TextCell>
+                                <Table.TextCell>{getCountries(movieDetails.production_countries)}</Table.TextCell>
                             </Table.Row>
                         </Table.Body>
                     </Table>
-                </MovieDetails>
+                </Stats>
             </MovieContainer>
         );
     }

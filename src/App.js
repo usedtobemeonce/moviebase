@@ -15,8 +15,8 @@ const Container = styled.div`
       "header header header" 
       ". main ." 
       "footer footer footer";
-    grid-template-rows: 70px 1fr 300px;
-    grid-template-columns: 25% 1fr 25%;
+    grid-template-rows: 100px 1fr 300px;
+    grid-template-columns: 20% 1fr 20%;
     grid-row-gap: 10px;
     grid-column-gap: 10px;
     height: 100vh;
