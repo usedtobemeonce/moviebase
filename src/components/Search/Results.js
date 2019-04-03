@@ -12,6 +12,8 @@ export default function (props) {
     const TRENDING_URL = `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`;
     const SEARCH_MOVIES_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}`;
 
+    console.log(process.env);
+
     const [movies, setMovies] = useState([]);
     // const [page, setPage] = useState(1);
     // const [totalPages, setTotalPages] = useState(1);
