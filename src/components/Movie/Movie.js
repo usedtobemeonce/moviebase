@@ -5,7 +5,6 @@ import {
     Badge,
     Spinner,
     Pane,
-    Icon,
     Table,
 } from 'evergreen-ui';
 
@@ -22,7 +21,7 @@ const MovieContainer = styled.div`
         "image movieDetails"
         "stats stats";
     grid-gap: 10px;
-    @media (max-width: 769px) {
+    @media (max-width: 900px) {
         grid-template-areas: 
             "image"
             "movieDetails"
@@ -79,7 +78,7 @@ export default function ({ match, history }) {
         try {
             const { data } = await axios.get(`${GET_MOVIE_DETAILS_URL}${movieId}?api_key=${API_KEY}`);
             setMovieDetails(data);
-            console.log(data);
+            // console.log(data);
         } catch (error) {
             console.error('Error getting movie details', error);
         }

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
-import Context from '../../context';
+import Context from '../../state/context';
 import Grid from './Grid/Grid';
 import Heading from '../UI/Heading';
 
 export default function (props) {
+    let isUnmounted = false;
     const { dispatch } = useContext(Context);
     const { searchTitle } = props;
     const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
@@ -20,6 +21,10 @@ export default function (props) {
 
     useEffect(() => {
         searchMovies(searchTitle);
+
+        return () => {
+            isUnmounted = true;
+        }
     }, [searchTitle]);
 
     const searchMovies = title => {
@@ -35,6 +40,7 @@ export default function (props) {
     const getTrending = async () => {
         try {
             const { data } = await axios.get(TRENDING_URL);
+            if (isUnmounted) return;
             setMovies(data.results);
             // setPage(data.page);
             // setTotalPages(data.total_pages);
@@ -49,6 +55,7 @@ export default function (props) {
             const searchQuery = `&language=en-US&query=${title}`;
             const { data } = await axios.get(`${SEARCH_MOVIES_URL}${searchQuery}`);
             data.results.sort((a, b) => parseFloat(b.popularity) - parseFloat(a.popularity));
+            if (isUnmounted) return;
             setMovies(data.results);
             // setPage(data.page);
             // setTotalPages(data.total_pages);

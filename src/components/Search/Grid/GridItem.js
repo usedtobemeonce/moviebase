@@ -33,7 +33,7 @@ export default function (props) {
 }
 
 const Overview = styled.p`
-    @media (max-width: 769px) {
+    @media (max-width: 900px) {
         display: none;
     }
 `;
