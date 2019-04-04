@@ -17,6 +17,7 @@ const MenuItem = styled(Button)`
 const MenuLinkItem = styled(Link)`
     text-decoration: none;
     color: inherit;
+    font-variant-caps: small-caps;
 `;
 
 const menuComponent = ({ menuItems, isSideBarMenu, className }) => {
