@@ -5,6 +5,7 @@ const Context = createContext({
     isSmallScreen: false,
     isSideBarOpen: false,
     currentUser: null,
+    searchTitle: '',
     selectedMovieId: null,
     selectedMovie: null,
 });

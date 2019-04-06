@@ -11,7 +11,7 @@ const AppBar = styled.header`
     grid-area: header;
     background-color: #282c34;
     color: white;
-    padding: 20px;
+    padding: 25px;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: auto 1fr auto;

@@ -1,28 +1,14 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
-import { Button } from 'evergreen-ui';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Button, Icon } from 'semantic-ui-react'
 
 import Context from '../../state/context';
 
-const Menu = styled.div`
-    grid-area: menu;
-    margin-right: 20px;
-`;
+export default ({ menuItems, className }) => {
 
-const MenuItem = styled(Button)`
-    color: white;
-`;
-
-const MenuLinkItem = styled(Link)`
-    text-decoration: none;
-    color: inherit;
-    font-variant-caps: small-caps;
-`;
-
-const menuComponent = ({ menuItems, isSideBarMenu, className }) => {
-
-    const { dispatch } = useContext(Context)
+    const { state, dispatch } = useContext(Context);
+    const { isSideBarOpen } = state;
 
     const handleMenuItemClicked = () => {
         dispatch({ type: 'SHOW_SIDEBAR', payload: false });
@@ -30,23 +16,43 @@ const menuComponent = ({ menuItems, isSideBarMenu, className }) => {
 
     return (
         <Menu className={className}>
-            {menuItems.map(item => (
+            {menuItems.map(item =>
                 <MenuItem
                     key={item.id}
-                    marginRight={5}
-                    appearance={(!isSideBarMenu && item.appearance) || "minimal"}
-                    intent={item.intent || "danger"}
-                    height={42}
-                    iconBefore={item.iconBefore || null}
-                    onClick={() => handleMenuItemClicked()}
-                >
-                    <MenuLinkItem to={item.link}>
+                    transparent={(item.isTransparent || isSideBarOpen) ? 1 : 0}
+                    color={(item.color && !isSideBarOpen) ? item.color : null}
+                    onClick={() => handleMenuItemClicked()}>
+                    <MenuItemLink transparent={(item.isTransparent && isSideBarOpen) ? 1 : 0} to={item.link}>
+                        {!item.isTransparent && <Icon name="play" size="small" />}
                         {item.text}
-                    </MenuLinkItem>
+                    </MenuItemLink>
                 </MenuItem>
-            ))}
+            )}
         </Menu>
     );
 }
 
-export default menuComponent;
+const Menu = styled.div`
+    grid-area: menu;
+    margin-right: 20px;
+`;
+
+const MenuItem = styled(Button)`
+    text-transform: uppercase !important;
+    ${props => props.transparent && css`
+        background: transparent !important;
+        color: white !important;
+    `}
+`;
+
+const MenuItemLink = styled(Link)`
+    color: inherit;
+    :hover, :active, :focus {
+        color: white !important;
+    }
+    ${props => props.transparent && css`
+        :hover, :active, :focus {
+            color: #ea3530 !important;
+        }
+    `}
+`;

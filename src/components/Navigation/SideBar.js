@@ -1,10 +1,40 @@
 import React, { useContext } from "react";
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import menuItems from './menuItems';
-import Menu from './Menu';
 import Logo from './Logo';
 import Context from '../../state/context';
+import menuItems from './menuItems';
+
+export default (props) => {
+    const { state, dispatch } = useContext(Context);
+    const { isSmallScreen, isSideBarOpen } = state;
+
+    const handleMenuItemClicked = () => {
+        dispatch({ type: 'SHOW_SIDEBAR', payload: false });
+    }
+
+    return (
+        <SideBar show={isSmallScreen && isSideBarOpen}>
+            <SideBarWrapper>
+                <LogoWrapper />
+
+                <StyledMenu>
+                    {menuItems.map(item =>
+                        <StyledMenuItem
+                            key={item.id}
+                            to={item.link}
+                            onClick={handleMenuItemClicked}
+                        >
+                            {item.text}
+                        </StyledMenuItem>
+                    )}
+                </StyledMenu>
+
+            </SideBarWrapper>
+        </SideBar>
+    );
+};
 
 const SideBar = styled.aside`
     width: 300px;
@@ -34,26 +64,22 @@ const LogoWrapper = styled(Logo)`
     align-self: center;
 `;
 
-const StyledMenu = styled(Menu)`
+const StyledMenu = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0;
     margin-top: 40px;
     border-top: 1px solid #555;
+    color: white !important;
 `;
 
-const sidebar = (props) => {
-    const { state } = useContext(Context);
-    const { isSmallScreen, isSideBarOpen } = state;
-
-    return (
-        <SideBar show={isSmallScreen && isSideBarOpen}>
-            <SideBarWrapper>
-                <LogoWrapper />
-                <StyledMenu isSideBarMenu menuItems={menuItems} />
-            </SideBarWrapper>
-        </SideBar>
-    );
-};
-
-export default sidebar;
+const StyledMenuItem = styled(Link)`
+    display: block;
+    padding: 15px;
+    color: #ea3530;
+    font-size: calc(12px + 1vw);
+    :hover {
+        color: #ea3530;
+        background-color: rgba(67, 90, 111, 0.06);
+    }
+`;

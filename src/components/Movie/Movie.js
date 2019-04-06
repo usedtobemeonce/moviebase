@@ -1,62 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {
-    Badge,
-    Spinner,
-    Pane,
-    Table,
-} from 'evergreen-ui';
+import { Loader } from 'semantic-ui-react'
 
 import Image from '../UI/Image';
-import Heading from '../UI/Heading';
-import { numberWithCommas } from '../../util/helper';
+import Video from './Video';
+import MovieDetails from './MovieDetails';
+import Stats from './Stats';
+import Cast from './Cast';
+import { stringFromArrayNameProps } from '../../util/helper';
 
 const MovieContainer = styled.div`
+    margin: auto;
+    max-width: 2000px;
     height: auto;
+    padding: 20px;
     display: grid;
-    grid-template-columns: minmax(auto, 450px) 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: 
-        "image movieDetails"
-        "stats stats";
+    grid-template-columns: 15% 20% 50% 15%;
+    grid-template-areas:
+        ". image details ."
+        ". video video ."
+        ". stats stats ."
+        ". cast cast .";
     grid-gap: 10px;
-    @media (max-width: 900px) {
-        grid-template-areas: 
+    justify-content: center;
+    @media (max-width: 1200px) {
+        grid-template-columns: 30% 70%;
+        grid-template-areas:
+            "image details"
+            "video video"
+            "stats stats"
+            ". cast cast .";
+    }
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
             "image"
-            "movieDetails"
-            "stats";
-        justify-content: center;
+            "details"
+            "video"
+            "stats"
+            "cast";
     }
 `;
 
-const MovieDetails = styled.div`
-    grid-area: movieDetails;
-    padding: 20px 10px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, auto) 1fr;
-    align-items: end;
+const StyledMovieDetails = styled(MovieDetails)`
+    grid-area: details;
 `;
 
-const Overview = styled.p`
-    font-size: calc(12px + .4vw);
+const StyledVideo = styled(Video)`
+    grid-area: video;
 `;
 
-const Genres = styled.div`
-    cursor: pointer;
-    align-self: end !important;
-`;
-
-const Stats = styled.div`
+const StyledStats = styled(Stats)`
     grid-area: stats;
 `;
 
+const StyledCast = styled(Cast)`
+    grid-area: cast;
+`;
+
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+const GET_MOVIE_VIDEOS_URL = id => `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;
+const GET_MOVIE_EXTERNAL_IDS_URL = id => `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${API_KEY}`;
+const GET_MOVIE_CREDITS_URL = id => `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`;
+
 export default function ({ match, history }) {
-    const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
     const GET_MOVIE_DETAILS_URL = `https://api.themoviedb.org/3/movie/`;
+    // const GET_SIMILAR_MOVIES_URL = `https://api.themoviedb.org/3/movie/450465/similar`;
+    // const GET_MOVIE_EXTERNAL_IDS_URL = `https://api.themoviedb.org/3/movie/450465/external_ids`;
+
     const [movieId, setMovieId] = useState(0);
     const [movieDetails, setMovieDetails] = useState(null);
+    const [movieVideos, setMovieVideos] = useState([]);
+    const [externalIds, setExternalIds] = useState([]);
+    const [cast, setCast] = useState([]);
 
     useEffect(() => {
         const movieIdParam = match.params.movieId;
@@ -72,6 +89,12 @@ export default function ({ match, history }) {
         getMovieDetails(movieId);
     }, [movieId]);
 
+    useEffect(() => {
+        if (movieDetails) {
+            getMovieRelatedData(movieDetails.id);
+        }
+    }, [movieDetails]);
+
     const getMovieDetails = async (movieId) => {
         if (movieId <= 0) return;
 
@@ -84,21 +107,48 @@ export default function ({ match, history }) {
         }
     }
 
-    const getLanguages = languagesList => {
-        const languages = languagesList.map(language => language.name).join(', ');
-        return languages;
+    /**
+     * Get movie related data
+     * 
+     * @param {*} id the id of the movie
+     */
+    const getMovieRelatedData = id => {
+        getMovieVideos(id);
+        getMovieExternalUrls(id);
+        getCast(id);
     }
 
-    const getCountries = countriesList => {
-        const countries = countriesList.map(country => country.name).join(', ');
-        return countries;
+    const getMovieVideos = async id => {
+        try {
+            const url = GET_MOVIE_VIDEOS_URL(id);
+            const { data } = await axios.get(url);
+            setMovieVideos(data.results);
+        } catch (error) {
+            console.log("Error getting movie videos", error);
+        }
     }
 
-    let content = (
-        <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
-            <Spinner />
-        </Pane>
-    );
+    const getMovieExternalUrls = async id => {
+        try {
+            const url = GET_MOVIE_EXTERNAL_IDS_URL(id);
+            const { data } = await axios.get(url);
+            setExternalIds(data);
+        } catch (error) {
+            console.log("Error getting external urls", error);
+        }
+    }
+
+    const getCast = async id => {
+        try {
+            const url = GET_MOVIE_CREDITS_URL(id);
+            const { data } = await axios.get(url);
+            setCast(data.cast);
+        } catch (error) {
+            console.log("Error getting credits", error);
+        }
+    }
+
+    let content = <Loader active size='medium' />;
 
     if (movieDetails) {
         content = (
@@ -108,51 +158,28 @@ export default function ({ match, history }) {
                     src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
                     alt={movieDetails.title}
                 />
-                <MovieDetails>
-                    <Heading big>{movieDetails.title}</Heading>
-                    <Heading>{movieDetails.tagline}</Heading>
-                    <Genres>
-                        {movieDetails.genres.map(genre => (
-                            <Badge key={genre.id} margin={5} color="green" isSolid>{genre.name}</Badge>
-                        ))}
-                    </Genres>
-                    <Overview>{movieDetails.overview}</Overview>
-                </MovieDetails>
-                <Stats>
-                    <Heading>Stats for nerds</Heading>
-                    <Table>
-                        <Table.Body>
-                            <Table.Row>
-                                <Table.TextCell>Status</Table.TextCell>
-                                <Table.TextCell>{movieDetails.status}</Table.TextCell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.TextCell>Release Date</Table.TextCell>
-                                <Table.TextCell>{movieDetails.release_date}</Table.TextCell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.TextCell>Budget</Table.TextCell>
-                                <Table.TextCell>{numberWithCommas(movieDetails.budget)}</Table.TextCell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.TextCell>Revenue</Table.TextCell>
-                                <Table.TextCell>{numberWithCommas(movieDetails.revenue)}</Table.TextCell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.TextCell>Languages</Table.TextCell>
-                                <Table.TextCell>{getLanguages(movieDetails.spoken_languages)}</Table.TextCell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.TextCell>Runtime</Table.TextCell>
-                                <Table.TextCell>{movieDetails.runtime} minutes</Table.TextCell>
-                            </Table.Row>
-                            <Table.Row>
-                                <Table.TextCell>Countries</Table.TextCell>
-                                <Table.TextCell>{getCountries(movieDetails.production_countries)}</Table.TextCell>
-                            </Table.Row>
-                        </Table.Body>
-                    </Table>
-                </Stats>
+
+                <StyledMovieDetails
+                    title={movieDetails.title}
+                    externalIds={externalIds}
+                    tagline={movieDetails.tagline}
+                    genres={movieDetails.genres}
+                    overview={movieDetails.overview}
+                />
+
+                <StyledVideo movieVideos={movieVideos} />
+
+                <StyledStats
+                    status={movieDetails.status}
+                    releaseDate={movieDetails.release_date}
+                    budget={movieDetails.budget}
+                    revenue={movieDetails.revenue}
+                    languages={stringFromArrayNameProps(movieDetails.spoken_languages)}
+                    runtime={movieDetails.runtime}
+                    countries={stringFromArrayNameProps(movieDetails.production_countries)}
+                />
+
+                <StyledCast cast={cast} />
             </MovieContainer>
         );
     }

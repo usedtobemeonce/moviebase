@@ -1,6 +1,5 @@
 export default [
-    { id: "id001", text: "search", link: "/" },
-    { id: "id002", text: "upcomming", link: "/upcomming" },
-    { id: "id003", text: "contacts", link: "/contacts" },
-    { id: "id004", text: "watch", link: "/watch", appearance: "primary", iconBefore: "play" },
+    { id: "id001", text: "search", link: "/", isTransparent: true },
+    { id: "id002", text: "upcomming", link: "/upcomming", isTransparent: true },
+    { id: "id004", text: "watch", link: "/watch", color: "red", icon: "play" },
 ];

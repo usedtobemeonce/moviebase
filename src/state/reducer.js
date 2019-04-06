@@ -15,6 +15,16 @@ export default function reducer(state, { type, payload }) {
                 ...state,
                 isSideBarOpen: payload
             }
+        case 'START_SEARCH':
+            return {
+                ...state,
+                searchTitle: payload
+            }
+        case 'CLEAR_SEARCH':
+            return {
+                ...state,
+                searchTitle: ''
+            }
         default: {
             return state;
         }

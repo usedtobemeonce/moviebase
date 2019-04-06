@@ -15,28 +15,19 @@ import useMedia from './hooks/useMedia';
 const Container = styled.div`
     display: grid;
     grid-template-areas: 
-      "header header header" 
-      ". main ." 
-      "footer footer footer";
+      "header" 
+      "main" 
+      "footer";
     grid-template-rows: 80px 1fr 300px;
-    grid-template-columns: 20% 1fr 20%;
+    grid-template-columns: 1fr;
     grid-row-gap: 10px;
     grid-column-gap: 10px;
     height: 100%;
     margin: 0;
     -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
-    @media (max-width: 1200px) {
-      grid-template-columns: 10% 1fr 10%;
-    }
-    @media (max-width: 900px) {
-        grid-template-areas: 
-        "header" 
-        "main" 
-        "footer";
-        grid-template-rows: 80px 1fr 300px;
-        grid-template-columns: 1fr;
-    }
+    backface-visibility: hidden;
 `;
 
 const Main = styled.main`

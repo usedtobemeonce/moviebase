@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { TextInput } from 'evergreen-ui';
+import { Input, Icon } from 'semantic-ui-react'
 
-const SearchField = styled(TextInput)`
-    background-color: #212121 !important;
-    font-size: calc(12px + .3vw) !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    :focus{
-        color: #03A9F4 !important;
-        box-shadow: inset 0 0 2px rgba(67, 90, 111, 0.14), inset 0 0 0 1px #03A9F4, 0 0 0 3px rgba(16, 112, 202, 0.14) !important;
-    }
-`;
+import Heading from '../UI/Heading';
+import Context from '../../state/context';
 
-const search = props => {
+export default props => {
+    const { state, dispatch } = useContext(Context);
+    const { searchTitle } = state;
     const [title, setTitle] = useState('');
 
+    useEffect(() => {
+        setTitle(searchTitle);
+    }, [searchTitle])
+
     const handleSubmit = () => {
-        props.onSearch(title);
+        dispatch({ type: 'START_SEARCH', payload: title });
     }
 
     const handleKeyPress = e => {
@@ -31,14 +29,36 @@ const search = props => {
     }
 
     return (
-        <SearchField
-            placeholder="Search movie titles..."
-            value={title}
-            onChange={handleChange}
-            onKeyPress={handleKeyPress}
-            height={70}
-            width="100%" />
+        <SearchWrapper>
+            <Heading>Search after titles</Heading>
+            <SearchField
+                icon
+                size="huge"
+                placeholder='Search...'
+                value={title}
+                onChange={handleChange}
+                onKeyPress={handleKeyPress} >
+                <input />
+                <Icon name='search' />
+            </SearchField>
+        </SearchWrapper>
     );
 }
 
-export default search;
+const SearchWrapper = styled.div`
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+`;
+
+const SearchField = styled(Input)`
+    margin-top: 15px;
+    input {
+        color: white !important;
+        border-color: #555 !important;
+        background-color: #212121 !important;
+    }
+    ${Icon} {
+        color: grey !important;
+    }
+`;

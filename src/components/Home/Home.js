@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import styled from 'styled-components';
+
 import Search from "../Search/Search";
 import Results from "../Search/Results";
 
-const home = props => {
-
-    const [searchTitle, setSearchTitle] = useState('');
-
-    const handleSearch = title => {
-        console.log('enter pressed, title changed: ' + title);
-        setSearchTitle(title);
+const Home = styled.div`
+    margin: 0 20%;
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 1200px) {
+        margin: 0 10%;
     }
+    @media(max-width: 900px) {
+        margin: 5px;
+    }
+`;
 
+const home = props => {
     return (
-        <>
-            <Search onSearch={handleSearch} />
-            <Results {...props} searchTitle={searchTitle} />
-        </>
+        <Home>
+            <Search />
+            <Results {...props} />
+        </Home>
     );
 }
 
