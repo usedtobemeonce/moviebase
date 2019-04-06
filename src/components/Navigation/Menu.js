@@ -48,11 +48,11 @@ const MenuItem = styled(Button)`
 const MenuItemLink = styled(Link)`
     color: inherit;
     :hover, :active, :focus {
-        color: white !important;
+        color: #ea3530 !important;
     }
     ${props => props.transparent && css`
         :hover, :active, :focus {
-            color: #ea3530 !important;
+            color: white !important;
         }
     `}
 `;

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { Button } from 'semantic-ui-react';
 
 import EmbeddedPlayer from '../UI/EmbeddedPlayer';
 import Header from '../UI/Heading';
 
-const video = ({ movieVideos, className }) => {
+export default ({ movieVideos, className }) => {
 
     const [movieVideoId, setMovieVideoId] = useState(null);
 
@@ -20,16 +21,16 @@ const video = ({ movieVideos, className }) => {
             <div className={className}>
                 <Header as="h2">Trailers and videos</Header>
                 <EmbeddedPlayer movieVideoId={movieVideoId} />
-                <Button.Group fluid color="black">
+                <VideoButtons fluid color="black">
                     {movieVideos.map((movieVideo, index) => (
-                        <Button
+                        <VideoButton
                             key={index}
                             onClick={() => setMovieVideoId(movieVideo.key)}
                         >
-                            {index}
-                        </Button>
+                            {index + 1}
+                        </VideoButton>
                     ))}
-                </Button.Group>
+                </VideoButtons>
             </div>
         );
     }
@@ -37,4 +38,10 @@ const video = ({ movieVideos, className }) => {
     return (content);
 }
 
-export default video;
+const VideoButtons = styled(Button.Group)`
+    flex-wrap: wrap;
+`;
+
+const VideoButton = styled(Button)`
+    flex: none !important;
+`;

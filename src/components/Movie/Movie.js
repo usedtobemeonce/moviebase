@@ -10,55 +10,6 @@ import Stats from './Stats';
 import Cast from './Cast';
 import { stringFromArrayNameProps } from '../../util/helper';
 
-const MovieContainer = styled.div`
-    margin: auto;
-    max-width: 2000px;
-    height: auto;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 15% 20% 50% 15%;
-    grid-template-areas:
-        ". image details ."
-        ". video video ."
-        ". stats stats ."
-        ". cast cast .";
-    grid-gap: 10px;
-    justify-content: center;
-    @media (max-width: 1200px) {
-        grid-template-columns: 30% 70%;
-        grid-template-areas:
-            "image details"
-            "video video"
-            "stats stats"
-            ". cast cast .";
-    }
-    @media (max-width: 600px) {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "image"
-            "details"
-            "video"
-            "stats"
-            "cast";
-    }
-`;
-
-const StyledMovieDetails = styled(MovieDetails)`
-    grid-area: details;
-`;
-
-const StyledVideo = styled(Video)`
-    grid-area: video;
-`;
-
-const StyledStats = styled(Stats)`
-    grid-area: stats;
-`;
-
-const StyledCast = styled(Cast)`
-    grid-area: cast;
-`;
-
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 const GET_MOVIE_VIDEOS_URL = id => `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;
 const GET_MOVIE_EXTERNAL_IDS_URL = id => `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${API_KEY}`;
@@ -153,8 +104,7 @@ export default function ({ match, history }) {
     if (movieDetails) {
         content = (
             <MovieContainer>
-                <Image
-                    style={{ gridArea: 'image' }}
+                <StyledImage
                     src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
                     alt={movieDetails.title}
                 />
@@ -186,3 +136,60 @@ export default function ({ match, history }) {
 
     return (content);
 }
+
+const MovieContainer = styled.div`
+    margin: auto;
+    max-width: 2000px;
+    height: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 15% 20% 50% 15%;
+    grid-template-areas:
+        ". image details ."
+        ". video video ."
+        ". stats stats ."
+        ". cast cast .";
+    grid-gap: 10px;
+    justify-content: center;
+    @media (max-width: 1200px) {
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            "image details"
+            "video video"
+            "stats stats"
+            ". cast cast .";
+    }
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "image"
+            "details"
+            "video"
+            "stats"
+            "cast";
+    }
+`;
+
+const StyledImage = styled(Image)`
+    grid-area: image;
+`;
+
+const StyledMovieDetails = styled(MovieDetails)`
+    grid-area: details;
+    margin: 10px 0;
+`;
+
+const StyledVideo = styled(Video)`
+    grid-area: video;
+    margin: 10px 0;
+`;
+
+const StyledStats = styled(Stats)`
+    grid-area: stats;
+    margin: 10px 0;
+`;
+
+const StyledCast = styled(Cast)`
+    grid-area: cast;
+    margin: 10px 0;
+`;
