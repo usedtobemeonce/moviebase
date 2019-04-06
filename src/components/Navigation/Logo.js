@@ -29,12 +29,12 @@ const Logo = styled.div`
     grid-area: logo;
     cursor: pointer;
     margin-left: 40px;
-    width: 200px;
-    transition: transform .2s ease-in;
+    width: 150px;
+    /* transition: transform .2s ease-in;
     transform: rotate(-2deg);
     :hover {
         transform: rotate(0);
-    }
+    } */
     @media (max-width: 900px) {
         margin: 0;
         transform: rotate(0);

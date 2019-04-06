@@ -34,7 +34,8 @@ export default ({ menuItems, className }) => {
 
 const Menu = styled.div`
     grid-area: menu;
-    margin-right: 20px;
+    margin-right: 40px;
+    justify-self: end;
 `;
 
 const MenuItem = styled(Button)`

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Search from "../Search/Search";
+// import Search from "../Search/Search";
 import Results from "../Search/Results";
 
 const Home = styled.div`
@@ -19,7 +19,7 @@ const Home = styled.div`
 const home = props => {
     return (
         <Home>
-            <Search />
+            {/* <Search /> */}
             <Results {...props} />
         </Home>
     );

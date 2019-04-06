@@ -4,7 +4,7 @@ import { Input, Icon } from 'semantic-ui-react'
 
 import Context from '../../state/context';
 
-export default props => {
+export default ({ className }) => {
     const { state, dispatch } = useContext(Context);
     const { searchTitle } = state;
     const [title, setTitle] = useState('');
@@ -30,7 +30,8 @@ export default props => {
     return (
         <SearchField
             icon
-            size="huge"
+            className={className}
+            size="big"
             placeholder='Search...'
             value={title}
             onChange={handleChange}
@@ -43,7 +44,7 @@ export default props => {
 
 
 const SearchField = styled(Input)`
-    margin-top: 15px;
+    /* margin-top: 15px; */
     input {
         color: white !important;
         border-color: #555 !important;
