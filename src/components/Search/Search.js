@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Input, Icon } from 'semantic-ui-react'
 
-import Heading from '../UI/Heading';
 import Context from '../../state/context';
 
 export default props => {
@@ -29,27 +28,19 @@ export default props => {
     }
 
     return (
-        <SearchWrapper>
-            <Heading>Search after titles</Heading>
-            <SearchField
-                icon
-                size="huge"
-                placeholder='Search...'
-                value={title}
-                onChange={handleChange}
-                onKeyPress={handleKeyPress} >
-                <input />
-                <Icon name='search' />
-            </SearchField>
-        </SearchWrapper>
+        <SearchField
+            icon
+            size="huge"
+            placeholder='Search...'
+            value={title}
+            onChange={handleChange}
+            onKeyPress={handleKeyPress} >
+            <input />
+            <Icon name='search' />
+        </SearchField>
     );
 }
 
-const SearchWrapper = styled.div`
-    margin: 10px 0;
-    display: flex;
-    flex-direction: column;
-`;
 
 const SearchField = styled(Input)`
     margin-top: 15px;

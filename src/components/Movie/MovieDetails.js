@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Icon, Segment } from 'semantic-ui-react';
 
-import Header from '../UI/Heading';
+import Header from '../UI/Header';
 
 export default ({ className, title, externalIds, tagline, genres, overview }) => {
 

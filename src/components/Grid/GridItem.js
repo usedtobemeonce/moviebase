@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Poster from '../../UI/Image';
-import ImageOverlay from '../../UI/ImageOverlay';
+import Poster from '../UI/Image';
+import ImageOverlay from '../UI/ImageOverlay';
 
 export default function (props) {
     const { item } = props;

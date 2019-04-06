@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Button } from 'semantic-ui-react';
 
 import EmbeddedPlayer from '../UI/EmbeddedPlayer';
-import Header from '../UI/Heading';
+import Header from '../UI/Header';
 
 export default ({ movieVideos, className }) => {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 
-import Header from '../UI/Heading';
+import Header from '../UI/Header';
 
 const cast = ({ className, cast }) => {
 

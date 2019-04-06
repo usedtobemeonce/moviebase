@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Icon } from 'semantic-ui-react';
 
-import Header from '../UI/Heading';
+import Header from '../UI/Header';
 import { numberWithCommas } from '../../util/helper';
 
 const stats = props => {

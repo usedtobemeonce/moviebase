@@ -9,6 +9,7 @@ import SideBar from './components/Navigation/SideBar';
 import Footer from "./components/Footer/Footer";
 import Home from './components/Home/Home';
 import Movie from './components/Movie/Movie';
+import Upcomming from './components/Upcomming/Upcomming';
 import Backdrop from './components/Backdrop/Backdrop';
 import useMedia from './hooks/useMedia';
 
@@ -50,6 +51,7 @@ const app = props => {
     <Switch>
       <Route exact path='/' component={Home} {...props} />
       <Route exact path='/movie/:movieId' component={Movie} {...props} />
+      <Route exact path='/upcomming' component={Upcomming} {...props} />
       <Redirect to="/" />
     </Switch>
   );

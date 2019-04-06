@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Heading from '../UI/Heading';
+import Heading from '../UI/Header';
 
 const Footer = styled.div`
     grid-area: footer;
