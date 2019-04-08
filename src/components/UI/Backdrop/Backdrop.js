@@ -13,10 +13,13 @@ const Backdrop = styled.div`
 `;
 
 export default function (props) {
+    const { show } = props;
 
     const handleBackdropClick = () => {
         props.onBackdropClicked();
     }
 
-    return (<Backdrop onClick={handleBackdropClick} />);
+    return show
+        ? <Backdrop onClick={handleBackdropClick} />
+        : null;
 }

@@ -6,7 +6,7 @@ import Context from '../../state/context';
 
 export default (props) => {
     const { className, history } = props;
-    const { state, dispatch } = useContext(Context);
+    const { state } = useContext(Context);
     const { searchTitle } = state;
     const [title, setTitle] = useState('');
 

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
+import Context from '../../state/context';
+
 const burgerButton = () => {
+    const { dispatch } = useContext(Context);
 
     const handleBurgerClicked = () => {
-        console.log('burger button clicked');
+        dispatch({ type: 'SHOW_SIDEBAR', payload: true });
     }
 
     return (

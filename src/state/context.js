@@ -8,7 +8,7 @@ const Context = createContext({
     searchTitle: '',
     selectedMovieId: null,
     selectedMovie: null,
-    page: 1,
+    page: "1",
     pageChangedByApp: false,
 });
 

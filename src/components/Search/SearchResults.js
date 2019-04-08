@@ -43,7 +43,7 @@ export default function (props) {
                 const currentPath = location.pathname;
                 const searchQuery = query.query;
                 let url = `${currentPath}?query=${searchQuery}`;
-                url = query.page && query.page == page ? url : `${url}&page=${page}`;
+                url = query.page && query.page === page ? url : `${url}&page=${page}`;
                 history.push(url);
                 getMovies(query.query, page);
             }

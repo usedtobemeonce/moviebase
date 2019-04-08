@@ -19,7 +19,7 @@ export default props => {
 
     useEffect(() => {
         const query = queryString.parse(location.search);
-        if (query.page && query.page != page && !pageChangedByApp) {
+        if (query.page && query.page !== page && !pageChangedByApp) {
             dispatch({ type: 'CHANGE_PAGE', payload: query.page });
         } else {
             history.push(`?page=${page}`);
