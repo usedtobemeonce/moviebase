@@ -1,26 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Burger = styled.div`
-    grid-area: burger;
-    cursor: pointer;
-    margin-left: 10px;
-    display: none;
-    div {
-        width: 30px;
-        height: 3px;
-        background-color: white;
-        margin: 5px 0;
-    }
-    @media (max-width: 900px) {
-        display: inline-block;
-    }
-`;
-
-const burgerButton = (props) => {
+const burgerButton = () => {
 
     const handleBurgerClicked = () => {
-        props.onClick();
+        console.log('burger button clicked');
     }
 
     return (
@@ -33,3 +17,21 @@ const burgerButton = (props) => {
 }
 
 export default burgerButton;
+
+const Burger = styled.div`
+    cursor: pointer;
+    margin-left: 10px;
+    :hover {
+        background-color: rgba(67, 90, 111, 0.06);
+        div {
+            background-color: #ea3530;
+        }
+    }
+    div {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+        
+    }
+`;

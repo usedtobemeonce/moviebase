@@ -7,7 +7,7 @@ export default props => {
 
     return (
         <StyledPagination
-            defaultActivePage={page}
+            activePage={page}
             pointing
             secondary
             boundaryRange={0}

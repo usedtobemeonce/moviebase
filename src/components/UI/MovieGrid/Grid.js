@@ -5,7 +5,16 @@ import GridItem from './GridItem';
 
 const Grid = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fill, 25%);
+    grid-template-columns: repeat(auto-fill, 20%);
+    @media (max-widht: 1200px) {
+        grid-template-columns: repeat(auto-fill, 25%);
+    }
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(auto-fill, 33%);
+    }
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(auto-fill, 50%);
+    }
 `;
 
 export default function (props) {

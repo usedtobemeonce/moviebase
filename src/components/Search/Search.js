@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Input, Icon } from 'semantic-ui-react'
+import { Input, Icon } from 'semantic-ui-react';
 
 import Context from '../../state/context';
 
-export default ({ className }) => {
+export default (props) => {
+    const { className, history } = props;
     const { state, dispatch } = useContext(Context);
     const { searchTitle } = state;
     const [title, setTitle] = useState('');
@@ -14,7 +15,8 @@ export default ({ className }) => {
     }, [searchTitle])
 
     const handleSubmit = () => {
-        dispatch({ type: 'START_SEARCH', payload: title });
+        // dispatch({ type: 'START_SEARCH', payload: title });
+        history.push(`/searchResults?query=${title}`);
     }
 
     const handleKeyPress = e => {
@@ -31,7 +33,7 @@ export default ({ className }) => {
         <SearchField
             icon
             className={className}
-            size="big"
+            size="large"
             placeholder='Search...'
             value={title}
             onChange={handleChange}
@@ -44,7 +46,6 @@ export default ({ className }) => {
 
 
 const SearchField = styled(Input)`
-    /* margin-top: 15px; */
     input {
         color: white !important;
         border-color: #555 !important;

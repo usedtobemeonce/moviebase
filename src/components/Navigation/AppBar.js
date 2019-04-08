@@ -1,16 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Button, Icon } from 'semantic-ui-react';
 
 import Logo from './Logo';
 import Search from "../Search/Search";
+import BurgerButton from './BurgerButton';
 
-export default () => {
+export default (props) => {
+    const { isSmallScreen } = props;
+
     return (
         <AppBar>
+            {isSmallScreen && <BurgerButton style={{ gridArea: 'burgerButton' }} />}
             <Logo />
-            <StyledSearch style={{ gridArea: 'search' }} />
-            <SignInButton color="red"><Icon name="sign in" /> Sign-In</SignInButton>
+            {!isSmallScreen && <StyledSearch style={{ gridArea: 'search' }} {...props} />}
+            {!isSmallScreen && <SignInButton color="red"><Icon name="sign in" /> Sign-In</SignInButton>}
         </AppBar>
     )
 }
@@ -26,19 +30,21 @@ const AppBar = styled.header`
     grid-template-areas: 
         "logo auto avatar";
     align-items: center; 
+    padding: 0 40px;
     @media (max-width: 900px) {
+        grid-template-columns: 60px 200px;
         grid-template-areas:
-         "logo";
+         "burgerButton logo";
     }
 `;
 
 const StyledSearch = styled(Search)`
     justify-self: center;
     width: 50%;
+    min-width: 400px;
 `;
 
 const SignInButton = styled(Button)`
     grid-area: avatar;
-    margin-right: 40px !important;
     justify-self: end;
 `;

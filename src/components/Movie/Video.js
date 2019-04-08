@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from 'semantic-ui-react';
 
-import EmbeddedPlayer from '../UI/EmbeddedPlayer';
+import EmbeddedPlayer from '../UI/VideoPlayer/EmbeddedPlayer';
 import Header from '../UI/Header';
 
 export default ({ movieVideos, className }) => {

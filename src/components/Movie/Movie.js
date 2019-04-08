@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { Loader } from 'semantic-ui-react'
 
-import Image from '../UI/Image';
+import Image from '../UI/Image/Image';
 import Video from './Video';
 import MovieDetails from './MovieDetails';
 import Stats from './Stats';

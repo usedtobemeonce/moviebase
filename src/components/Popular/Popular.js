@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import axios from 'axios';
 import queryString from 'query-string';
 
-import Context from '../../state/context';
 import Results from '../Results/Results';
+import Context from '../../state/context';
 
 export default props => {
+
     let isUnmounted = false;
     const { history, location } = props;
     const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
-    const UPCOMMING_MOVIES_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`;
+    const POPULAR_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
     const [movies, setMovies] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const { state, dispatch } = useContext(Context);
@@ -32,29 +33,31 @@ export default props => {
 
     const getMovies = async (page) => {
         try {
-            const url = `${UPCOMMING_MOVIES_URL}&page=${page}`;
+            const url = `${POPULAR_URL}&page=${page}`;
             const { data } = await axios.get(url);
-            if (!isUnmounted) {
-                setTotalPages(data.total_pages);
-                setMovies(data.results);
+            if (isUnmounted) {
+                return;
             }
+            data.results.sort((a, b) => parseFloat(b.popularity) - parseFloat(a.popularity));
+            setTotalPages(data.total_pages);
+            setMovies(data.results);
         } catch (err) {
-            console.error("Error getting upcomming movies", err);
+            console.error('Error searching movies', err);
         }
     }
 
     return (
         <Container>
             <Results
-                resultsTitle={'Upcomming movies'}
-                resultsSubtitle={'Latest & Greatest'}
+                resultsTitle={'Popular movies'}
+                resultsSubtitle={'Todays most popular movies'}
                 moviesList={movies}
                 totalPages={totalPages}
                 page={page}
                 {...props}
             />
         </Container>
-    )
+    );
 }
 
 const Container = styled.div`

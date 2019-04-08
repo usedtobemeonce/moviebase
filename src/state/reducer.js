@@ -25,6 +25,16 @@ export default function reducer(state, { type, payload }) {
                 ...state,
                 searchTitle: ''
             }
+        case 'CHANGE_PAGE':
+            return {
+                ...state,
+                page: payload
+            }
+        case 'CHANGE_PAGE_BY':
+            return {
+                ...state,
+                pageChangedByApp: payload
+            }
         default: {
             return state;
         }
