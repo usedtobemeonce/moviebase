@@ -143,12 +143,12 @@ const MovieContainer = styled.div`
     height: auto;
     padding: 20px;
     display: grid;
-    grid-template-columns: 15% 20% 50% 15%;
+    grid-template-columns: 20% 50%;
     grid-template-areas:
-        ". image details ."
-        ". video video ."
-        ". stats stats ."
-        ". cast cast .";
+        "image details"
+        "video video"
+        "stats stats"
+        "cast cast";
     grid-gap: 10px;
     justify-content: center;
     @media (max-width: 1200px) {
@@ -157,7 +157,7 @@ const MovieContainer = styled.div`
             "image details"
             "video video"
             "stats stats"
-            ". cast cast .";
+            "cast cast";
     }
     @media (max-width: 600px) {
         grid-template-columns: 1fr;

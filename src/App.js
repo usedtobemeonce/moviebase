@@ -12,6 +12,7 @@ import Movie from './components/Movie/Movie';
 import Upcomming from './components/Upcomming/Upcomming';
 import Search from "./components/Search/Search";
 import SearchResults from './components/Search/SearchResults';
+import Home from './components/Home/Home';
 import useMedia from './hooks/useMedia';
 
 const app = props => {
@@ -28,8 +29,9 @@ const app = props => {
 
   const routes = (
     <Switch>
-      <Route exact path='/' component={Popular} {...props} />
+      <Route exact path='/' component={Home} {...props} />
       <Route exact path="/searchResults" component={SearchResults} {...props} />
+      <Route exact path="/popular" component={Popular} {...props} />
       <Route exact path='/movie/:movieId' component={Movie} {...props} />
       <Route exact path='/upcomming' component={Upcomming} {...props} />
       <Redirect to="/" />
@@ -61,8 +63,8 @@ const Container = styled.div`
     grid-template-areas: 
       "header header" 
       "sidebar main" 
-      "sidebar footer";
-    grid-template-rows: 80px 1fr 300px;
+      "footer footer";
+    grid-template-rows: 80px 1fr auto;
     grid-template-columns: 250px 1fr;
     height: 100%;
     margin: 0;
@@ -75,7 +77,7 @@ const Container = styled.div`
     /* Small screen layout */
     ${props => props.isSmallScreen && css`
     grid-template-columns: 1fr;
-    grid-template-rows: 80px auto 1fr 300px;
+    grid-template-rows: 80px auto 1fr auto;
     grid-template-areas: 
       "header" 
       "search"
@@ -86,6 +88,7 @@ const Container = styled.div`
 
 const Main = styled.main`
   grid-area: main;
+  margin-bottom: 30px;
 `;
 
 const StyledSideBar = styled(SideBar)`

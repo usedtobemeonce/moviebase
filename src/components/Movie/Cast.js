@@ -1,30 +1,97 @@
-import React from 'react';
-import { Table } from 'semantic-ui-react';
+import React, { useState, useEffect } from 'react';
+import { Segment } from 'semantic-ui-react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Header from '../UI/Header';
+import Image from '../UI/Image/Image';
+import CustomLink from '../UI/CustomLink';
 
 const cast = ({ className, cast }) => {
+
+    const [showCastCount, setShowCastCount] = useState(0);
+    const [showCast, setShowCast] = useState(false);
+
+    const handleShowCast = () => {
+        if (showCast) {
+            setShowCastCount(cast.length > 15 ? 15 : cast.length);
+        } else {
+            setShowCastCount(cast.length);
+        }
+        setShowCast(!showCast);
+    }
+
+    useEffect(() => {
+        handleShowCast();
+    }, [cast])
+
+    let allCast = (
+        cast.slice(0, showCastCount).map(actor => (
+            <React.Fragment key={actor.id}>
+                <StyledImageCol>
+                    <Image
+                        size="mini"
+                        avatar
+                        src={`https://image.tmdb.org/t/p/w45${actor.profile_path}`} />
+                </StyledImageCol>
+                <StyledNameCol as="h3">
+                    <Link to="/">{actor.name}</Link>
+                </StyledNameCol>
+                <StyledAs as="h3">
+                    {' '}-{' '}
+                </StyledAs>
+                <StyledCharacterCol as="h3">
+                    {actor.character}
+                </StyledCharacterCol>
+            </React.Fragment>
+        ))
+    );
 
     return (
         <div className={className}>
             <Header as="h2">Cast</Header>
-            <Table basic="very" celled inverted padded collapsing>
-                <Table.Body>
-                    {cast.slice(0, 20).map(actor => (
-                        <Table.Row key={actor.id}>
-                            <Table.Cell>
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w45/${actor.profile_path}`}
-                                    alt="actor profile" />
-                            </Table.Cell>
-                            <Table.Cell>{actor.name}</Table.Cell>
-                            <Table.Cell>{actor.character}</Table.Cell>
-                        </Table.Row>
-                    ))}
-                </Table.Body>
-            </Table>
+            <CustomLink onClick={handleShowCast}>
+                {showCast
+                    ? `Show less`
+                    : `Showing - ${showCastCount}. Click to show all ${cast.length} actors.`
+                }
+            </CustomLink>
+            <StyledCast inverted raised>
+                {allCast}
+            </StyledCast>
         </div>
     )
 }
 
 export default cast;
+
+const StyledCast = styled(Segment)`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 800px;
+    max-height: 500px;
+    overflow-y: auto;
+`;
+
+const StyledImageCol = styled.div`
+    margin: 10px 0;
+    flex: 1 0 10%;
+`;
+
+const StyledNameCol = styled.div`
+    padding: 0 10px;
+    margin: 10px 0;
+    flex: 1 0 35%;
+`;
+
+const StyledAs = styled(Header)`
+    padding: 0 10px;
+    flex: 1 0 5%;
+`;
+
+const StyledCharacterCol = styled(Header)`
+    padding: 0 10px;
+    flex: 1 0 45%;
+`;

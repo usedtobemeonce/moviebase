@@ -43,7 +43,6 @@ export default ({ className, isSmallScreen }) => {
                             </StyledMenuItem>
                         )}
                     </StyledMenu>
-                    <hr style={{ margin: '10px' }} />
                     <Button color="red">Sign In</Button>
                 </SideBarWrapper>
             </SideBar>
@@ -70,7 +69,7 @@ const SideBar = styled.aside`
         height: 100%;
         top: 0;
         left: 0;
-        z-index: 200;
+        z-index: 201;
         background-color: #212121;
         box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.3);
         transition: transform 0.3s ease-out;
@@ -93,6 +92,8 @@ const StyledMenu = styled.div`
     margin: 0;
     color: white !important;
     margin: 10px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
 `;
 
 const StyledMenuItem = styled(Link)`
