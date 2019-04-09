@@ -70,6 +70,7 @@ const Container = styled.div`
     transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    overflow-y: scroll;
 
     /* Small screen layout */
     ${props => props.isSmallScreen && css`

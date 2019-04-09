@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Input, Icon } from 'semantic-ui-react';
+import queryString from 'query-string';
 
 import Context from '../../state/context';
 
 export default (props) => {
-    const { className, history } = props;
-    const { state } = useContext(Context);
+    const { className, history, location } = props;
+    const { state, dispatch } = useContext(Context);
     const { searchTitle } = state;
     const [title, setTitle] = useState('');
 
@@ -14,8 +15,15 @@ export default (props) => {
         setTitle(searchTitle);
     }, [searchTitle])
 
+    useEffect(() => {
+        const searchQuery = queryString.parse(location.search);
+        if (searchQuery.query && !searchTitle) {
+            dispatch({ type: 'START_SEARCH', payload: searchQuery.query });
+        }
+    }, []);
+
     const handleSubmit = () => {
-        // dispatch({ type: 'START_SEARCH', payload: title });
+        dispatch({ type: 'START_SEARCH', payload: title });
         history.push(`/searchResults?query=${title}`);
     }
 
