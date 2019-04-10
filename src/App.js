@@ -66,13 +66,13 @@ const Container = styled.div`
       "footer footer";
     grid-template-rows: 80px 1fr auto;
     grid-template-columns: 250px 1fr;
-    height: 100%;
+    min-height: 100%;
     margin: 0;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     /* Small screen layout */
     ${props => props.isSmallScreen && css`

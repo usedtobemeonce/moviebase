@@ -66,7 +66,7 @@ const SideBar = styled.aside`
         position: fixed;
         width: 250px;
         max-width: 70%;
-        height: 100%;
+        height: 100vh;
         top: 0;
         left: 0;
         z-index: 201;
