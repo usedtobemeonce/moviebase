@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import queryString from 'query-string';
 
-import Results from '../components/Results/Results';
+import Results from '../components/results/Results';
 import Context from '../state/context';
 
 export default props => {

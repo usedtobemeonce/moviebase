@@ -4,7 +4,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 import Context from '../state/context';
-import Results from '../components/Results/Results';
+import Results from '../components/results/Results';
 
 export default props => {
     let isUnmounted = false;
