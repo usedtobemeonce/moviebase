@@ -107,6 +107,7 @@ export default home;
 const Home = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 5px;
 
     button { 
         margin-top: 30px;
@@ -122,6 +123,10 @@ const Banner = styled.div`
     flex-direction: column;
     align-items: center;    
     justify-content: center;
+
+    p {
+        padding: 0 10%;
+    }
 `;
 
 const StyledSection = styled.section`
