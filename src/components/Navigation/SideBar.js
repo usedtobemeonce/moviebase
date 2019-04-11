@@ -49,7 +49,9 @@ export default ({ className, isSmallScreen, location }) => {
                             </StyledMenuItem>
                         )}
                     </StyledMenu>
-                    <Button variant="danger"><FontAwesomeIcon icon="sign-in-alt" /> Sign In</Button>
+                    {isSmallScreen &&
+                        <Button variant="danger"><FontAwesomeIcon icon="sign-in-alt" /> Sign In</Button>
+                    }
                 </SideBarWrapper>
             </SideBar>
         </>

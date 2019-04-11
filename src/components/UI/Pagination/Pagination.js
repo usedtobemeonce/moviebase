@@ -6,7 +6,10 @@ export default props => {
     const { totalPages, totalResults, page } = props;
 
     const handlePageChanged = activePage => {
+        // if (!isNaN(activePage.selected)) {
+        console.log('here');
         props.onChange(activePage.selected + 1);
+        // }
     }
 
     if (totalResults === 0) {
@@ -66,7 +69,7 @@ const Pagination = styled.div`
                 color: white;
                 text-decoration: none;
                 display: block;
-                padding: .5rem .75rem;
+                padding: .2rem .75rem;
                 :focus {
                     outline: none !important;
                 }
