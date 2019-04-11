@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import YoutubePlayer from '../../components/shared/VideoPlayer/YoutubePlayer';
-import Header from '../../components/shared/Header';
-import Pagination from '../../components/shared/Pagination/Pagination';
+import YoutubePlayer from '../shared/YoutubePlayer';
+import Header from '../shared/Header';
+import Pagination from '../shared/Pagination';
 
 export default ({ movieVideos, className }) => {
 

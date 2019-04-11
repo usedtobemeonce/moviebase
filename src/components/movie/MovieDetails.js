@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Panel from '../../components/shared/Panel/Panel';
 
-import Header from '../../components/shared/Header';
+import Panel from '../shared/Panel';
+
+import Header from '../shared/Header';
 
 export default ({ className, title, externalIds, tagline, genres, overview }) => {
 

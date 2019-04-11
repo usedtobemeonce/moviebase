@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-
-import Header from '../../components/shared/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Header from '../shared/Header';
 import { numberWithCommas } from '../../util/helper';
 
 const stats = props => {

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import Header from '../../components/UI/Header';
-import Image from '../../components/UI/Image/Image';
-import CustomLink from '../../components/UI/CustomLink';
-import Panel from '../../components/UI/Panel/Panel';
+import Header from '../shared/Header';
+import Image from '../shared/Image';
+import CustomLink from '../shared/CustomLink';
+import Panel from '../shared/Panel';
 
 const cast = ({ className, cast }) => {
 

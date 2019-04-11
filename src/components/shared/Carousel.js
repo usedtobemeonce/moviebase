@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Carousel } from 'react-bootstrap';
 
-import Header from '../Header';
+import Header from './Header';
 
 const carousel = props => {
 

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import Image from '../../components/shared/Image/Image';
-import Video from './Video';
-import MovieDetails from './MovieDetails';
-import Stats from './Stats';
-import Cast from './Cast';
-import { stringFromArrayNameProps } from '../../util/helper';
+import Image from '../components/shared/Image';
+import Video from '../components/movie/Video';
+import MovieDetails from '../components/movie/MovieDetails';
+import Stats from '../components/movie/Stats';
+import Cast from '../components/movie/Cast';
+import { stringFromArrayNameProps } from '../util/helper';
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 const GET_MOVIE_VIDEOS_URL = id => `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;

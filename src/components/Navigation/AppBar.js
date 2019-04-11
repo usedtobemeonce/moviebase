@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Logo from './Logo';
-import Search from "../Search/Search";
+import Search from "../search/Search";
 import BurgerButton from './BurgerButton';
-import Button from '../UI/Button/Button';
+import Button from '../shared/Button';
 
 export default (props) => {
     const { isSmallScreen } = props;

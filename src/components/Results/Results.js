@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import Context from '../../state/context';
 import Header from '../shared/Header';
-import Pagination from '../shared/Pagination/Pagination';
-import Grid from '../shared/MovieGrid/Grid';
+import Pagination from '../shared/Pagination';
+import Grid from '../shared/Grid';
 
 export default ({ resultsTitle, resultsSubtitle, moviesList, totalPages, totalResults, history, page }) => {
 

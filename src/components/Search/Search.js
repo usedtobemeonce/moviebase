@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import queryString from 'query-string';
 
 import Context from '../../state/context';
-import Input from '../UI/Input/Input';
+import Input from '../shared/Input';
 
 export default (props) => {
     const { className, history, location } = props;

@@ -4,9 +4,9 @@ import axios from 'axios';
 
 import Context from '../state/context';
 import Header from '../components/shared/Header';
-import Carousel from '../components/shared/Carousel/Carousel';
+import Carousel from '../components/shared/Carousel';
 import BANNER_BACKGROUND_IMAGE from '../assets/images/home_banner.jpg';
-import Button from '../components/shared/Button/Button';
+import Button from '../components/shared/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const home = props => {
