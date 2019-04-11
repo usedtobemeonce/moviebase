@@ -6,7 +6,7 @@ const youtubePlayer = ({ className, movieVideoId, autoplay, active }) => {
 
     const opts = {
         playerVars: {
-            autoplay: autoplay
+            autoplay: autoplay,
         }
     };
 

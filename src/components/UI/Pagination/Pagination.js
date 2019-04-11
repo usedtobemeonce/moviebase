@@ -6,10 +6,9 @@ export default props => {
     const { totalPages, totalResults, page } = props;
 
     const handlePageChanged = activePage => {
-        // if (!isNaN(activePage.selected)) {
-        console.log('here');
-        props.onChange(activePage.selected + 1);
-        // }
+        if (!isNaN(activePage.selected)) {
+            props.onChange(activePage.selected + 1);
+        }
     }
 
     if (totalResults === 0) {

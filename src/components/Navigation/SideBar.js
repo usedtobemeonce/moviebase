@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import menuItems from './menuItems';
 import Context from '../../state/context';
 import Backdrop from '../UI/Backdrop/Backdrop';
+import Button from '../UI/Button/Button';
 
 export default ({ className, isSmallScreen, location }) => {
     const { state, dispatch } = useContext(Context);

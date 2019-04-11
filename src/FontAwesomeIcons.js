@@ -19,6 +19,7 @@ import {
     faUsers,
     faPlay,
     faDollarSign,
+    faArrowAltCircleRight,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -36,4 +37,5 @@ library.add(
     faTwitter,
     faImdb,
     faDollarSign,
+    faArrowAltCircleRight,
 );

@@ -15,7 +15,7 @@ export default ({ movieVideos, className }) => {
     }, [movieVideos]);
 
     const handlePageChanged = page => {
-        setMovieVideoId(movieVideos[page].key);
+        setMovieVideoId(movieVideos[page - 1].key);
     }
 
     let content = null;
@@ -24,7 +24,11 @@ export default ({ movieVideos, className }) => {
             <div className={className}>
                 <Header as="h2">Trailers and videos</Header>
                 <YoutubePlayer movieVideoId={movieVideoId} />
-                <Pagination totalPages={movieVideos.length} onChange={handlePageChanged} />
+                <Pagination
+                    page={1}
+                    totalPages={movieVideos.length}
+                    totalResults={movieVideos.length}
+                    onChange={handlePageChanged} />
             </div>
         );
     }
