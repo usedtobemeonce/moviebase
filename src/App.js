@@ -4,8 +4,8 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import Context from './state/context';
 import reducer from './state/reducer';
-import AppBar from "./components/Navigation/AppBar";
-import SideBar from './components/Navigation/SideBar';
+import AppBar from "./components/navigation/AppBar";
+import SideBar from './components/navigation/SideBar';
 import Footer from "./components/shared/Footer";
 import Popular from './pages/Popular';
 import Movie from './pages/Movie';
