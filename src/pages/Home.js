@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Context from '../state/context';
 import Header from '../components/shared/Header';
 import Carousel from '../components/shared/Carousel';
 import BANNER_BACKGROUND_IMAGE from '../assets/images/home_banner.jpg';
 import Button from '../components/shared/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Card from '../components/shared/Card';
 
 const home = props => {
 
@@ -82,6 +83,21 @@ const home = props => {
                 </Header>
                 <Carousel movies={nowPlayingMovies} onClick={handleCarouselItemClick} />
             </StyledSection>
+            <StyledSection>
+                <Header middle>Top 4 of Tom Cruise's highest ranked science fiction movies</Header>
+                <Header>Did you know?</Header>
+                <StyledCardGroup>
+                    {tomCruiseMovies.slice(1, 5).map(movie => (
+                        <Card
+                            key={movie.id}
+                            id={movie.id}
+                            imageUrl={movie.poster_path}
+                            onClick={() => handleCarouselItemClick(movie.id)}
+                            title={movie.title}
+                        />
+                    ))}
+                </StyledCardGroup>
+            </StyledSection>
         </Home>
     );
 }
@@ -114,5 +130,28 @@ const StyledSection = styled.section`
 
     @media (max-width: 1200px) {
         padding: 0;
+    }
+`;
+
+const StyledCardGroup = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    div {
+        margin: 10px;
+        flex: 1 1 22%;
+    }
+
+    @media (max-width: 1200px) {
+        div {
+            flex: 1 1 47%;
+        }
+    }
+    @media (max-width: 900px) {
+        div {
+            margin: 5px;
+            flex: 1 1 45%;
+        }
     }
 `;

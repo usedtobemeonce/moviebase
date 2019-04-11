@@ -17,10 +17,10 @@ export default function () {
                 <FooterSocialMedia>
                     <Header>Follow us on social media</Header>
                     <SocialMediaLinks>
-                        <FontAwesomeIcon fixedWidth size="lg" icon={['fab', 'facebook']} />
-                        <FontAwesomeIcon fixedWidth size="lg" icon={['fab', 'instagram']} />
-                        <FontAwesomeIcon fixedWidth size="lg" icon={['fab', 'twitter']} />
-                        <FontAwesomeIcon fixedWidth size="lg" icon={['fab', 'youtube']} />
+                        <FontAwesomeIcon fixedWidth size="2x" icon={['fab', 'facebook']} />
+                        <FontAwesomeIcon fixedWidth size="2x" icon={['fab', 'instagram']} />
+                        <FontAwesomeIcon fixedWidth size="2x" icon={['fab', 'twitter']} />
+                        <FontAwesomeIcon fixedWidth size="2x" icon={['fab', 'youtube']} />
                     </SocialMediaLinks>
                 </FooterSocialMedia>
             </FooterMenuWrapper>
