@@ -20,6 +20,7 @@ import {
     faPlay,
     faDollarSign,
     faArrowAltCircleRight,
+    faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -38,4 +39,5 @@ library.add(
     faImdb,
     faDollarSign,
     faArrowAltCircleRight,
+    faPaperPlane,
 );

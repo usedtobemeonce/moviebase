@@ -11,6 +11,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "dotenv": "^7.0.0",
+    "formik": "^1.5.2",
     "nuka-carousel": "^4.5.3",
     "query-string": "^6.4.2",
     "react": "^16.8.6",
@@ -25,7 +26,8 @@
     "react-youtube": "^7.9.0",
     "serve": "^10.1.2",
     "styled-components": "^4.2.0",
-    "yarn": "^1.15.2"
+    "yarn": "^1.15.2",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "dev": "react-scripts start",

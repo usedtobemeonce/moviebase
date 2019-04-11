@@ -12,6 +12,7 @@ import Movie from './pages/Movie';
 import Upcomming from './pages/Upcomming';
 import Search from "./components/search/Search";
 import SearchResults from './pages/SearchResults';
+import Contacts from './pages/Contacts';
 import Home from './pages/Home';
 import useMedia from './hooks/useMedia';
 import './FontAwesomeIcons';
@@ -35,6 +36,7 @@ const app = props => {
       <Route exact path="/popular" component={Popular} {...props} />
       <Route exact path='/movie/:movieId' component={Movie} {...props} />
       <Route exact path='/upcomming' component={Upcomming} {...props} />
+      <Route exact path='/contacts' component={Contacts} />
       <Redirect exact to="/" />
     </Switch>
   );

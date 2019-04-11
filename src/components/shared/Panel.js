@@ -14,6 +14,7 @@ const panel = ({ className, children }) => {
 export default panel;
 
 const StyledPanel = styled(Card)`
-    background-color: #1b1c1d;
+    /* background-color: #1b1c1d; */
+    background-color: #282c34;
     padding: 15px;
 `;

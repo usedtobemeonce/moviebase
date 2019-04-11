@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import queryString from 'query-string';
 
 import Context from '../../state/context';
-import Input from '../shared/Input';
+import SearchInput from '../shared/SearchInput';
 
 export default (props) => {
     const { className, history, location } = props;
@@ -37,7 +37,7 @@ export default (props) => {
     }
 
     return (
-        <Input
+        <SearchInput
             className={className}
             placeholder="Search..."
             aria-label="search"

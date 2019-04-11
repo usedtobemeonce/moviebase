@@ -10,9 +10,9 @@ export default function () {
         <Footer>
             <FooterMenuWrapper>
                 <FooterMenu>
-                    <CustomLink to="/">About</CustomLink>
-                    <CustomLink to="/">Contacts</CustomLink>
-                    <CustomLink to="/">FAQ</CustomLink>
+                    <CustomLink to="/about">About</CustomLink>
+                    <CustomLink to="/contacts">Contacts</CustomLink>
+                    <CustomLink to="/faq">FAQ</CustomLink>
                 </FooterMenu>
                 <FooterSocialMedia>
                     <Header>Follow us on social media</Header>
@@ -55,7 +55,6 @@ const FooterMenu = styled.div`
     margin: 10px 50px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     a {
         color: inherit;
     }
