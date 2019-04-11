@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Icon } from 'semantic-ui-react';
+import Table from 'react-bootstrap/Table';
 
 import Header from '../UI/Header';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { numberWithCommas } from '../../util/helper';
 
 const stats = props => {
@@ -10,47 +11,43 @@ const stats = props => {
     return (
         <div className={className}>
             <Header as="h2">Stats for nerds</Header>
-            <Table celled inverted padded>
-                <Table.Body>
-                    <Table.Row>
-                        <Table.Cell>Status</Table.Cell>
-                        <Table.Cell>{status}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Release Date</Table.Cell>
-                        <Table.Cell>{releaseDate}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Budget</Table.Cell>
-                        <Table.Cell>
-                            <>
-                                <Icon name="dollar" color="green" />
-                                {numberWithCommas(budget)}
-                            </>
-                        </Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Revenue</Table.Cell>
-                        <Table.Cell>
-                            <>
-                                <Icon name="dollar" color="green" />
-                                {numberWithCommas(revenue)}
-                            </>
-                        </Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Languages</Table.Cell>
-                        <Table.Cell>{languages}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Runtime</Table.Cell>
-                        <Table.Cell>{runtime} minutes</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                        <Table.Cell>Countries</Table.Cell>
-                        <Table.Cell>{countries}</Table.Cell>
-                    </Table.Row>
-                </Table.Body>
+            <Table borderless striped responsive variant="dark">
+                <tbody>
+                    <tr>
+                        <td>Status</td>
+                        <td>{status}</td>
+                    </tr>
+                    <tr>
+                        <td>Release Date</td>
+                        <td>{releaseDate}</td>
+                    </tr>
+                    <tr>
+                        <td>Budget</td>
+                        <td>
+                            <FontAwesomeIcon color="green" fixedWidth icon="dollar-sign" />
+                            {numberWithCommas(budget)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Revenue</td>
+                        <td>
+                            <FontAwesomeIcon color="green" fixedWidth icon="dollar-sign" />
+                            {numberWithCommas(revenue)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Languages</td>
+                        <td>{languages}</td>
+                    </tr>
+                    <tr>
+                        <td>Runtime</td>
+                        <td>{runtime}</td>
+                    </tr>
+                    <tr>
+                        <td>Countries</td>
+                        <td>{countries}</td>
+                    </tr>
+                </tbody>
             </Table>
         </div>
     );

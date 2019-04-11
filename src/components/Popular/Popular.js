@@ -14,6 +14,7 @@ export default props => {
     const POPULAR_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
     const [movies, setMovies] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
+    const [totalResults, setTotalResults] = useState(0);
     const { state, dispatch } = useContext(Context);
     const { page, pageChangedByApp } = state;
 
@@ -40,6 +41,7 @@ export default props => {
             }
             data.results.sort((a, b) => parseFloat(b.popularity) - parseFloat(a.popularity));
             setTotalPages(data.total_pages);
+            setTotalResults(data.total_results);
             setMovies(data.results);
         } catch (err) {
             console.error('Error searching movies', err);
@@ -53,6 +55,7 @@ export default props => {
                 resultsSubtitle={'Todays most popular movies'}
                 moviesList={movies}
                 totalPages={totalPages}
+                totalResults={totalResults}
                 page={page}
                 {...props}
             />

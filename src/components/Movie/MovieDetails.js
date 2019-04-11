@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Icon, Segment } from 'semantic-ui-react';
+import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Panel from '../UI/Panel/Panel';
 
 import Header from '../UI/Header';
 
@@ -14,28 +17,28 @@ export default ({ className, title, externalIds, tagline, genres, overview }) =>
                     <a href={`https://www.facebook.com/${externalIds.facebook_id}`}
                         target="_blank"
                         rel="noopener noreferrer">
-                        <Icon name="facebook official" size="big" />
+                        <FontAwesomeIcon fixedWidth size="2x" icon={['fab', 'facebook']} />
                     </a>
                 }
                 {externalIds.instagram_id &&
                     <a href={`https://www.instagram.com/${externalIds.instagram_id}`}
                         target="_blank"
                         rel="noopener noreferrer">
-                        <Icon name="instagram" size="big" />
+                        <FontAwesomeIcon fixedWidth size="2x" icon={['fab', 'instagram']} />
                     </a>
                 }
                 {externalIds.twitter_id &&
                     <a href={`https://twitter.com/${externalIds.twitter_id}`}
                         target="_blank"
                         rel="noopener noreferrer">
-                        <Icon name="twitter" size="big" />
+                        <FontAwesomeIcon fixedWidth size="2x" icon={['fab', 'twitter']} />
                     </a>
                 }
                 {externalIds.imdb_id &&
                     <a href={`https://www.imdb.com/title/${externalIds.imdb_id}`}
                         target="_blank"
                         rel="noopener noreferrer">
-                        <Icon name="imdb" size="big" />
+                        <FontAwesomeIcon fixedWidth size="2x" icon={['fab', 'imdb']} />
                     </a>
                 }
             </Icons>
@@ -45,17 +48,19 @@ export default ({ className, title, externalIds, tagline, genres, overview }) =>
     return (
         <MovieDetails className={className}>
             <Header big as="h1">{title}</Header>
-            <Segment inverted raised>
+            <Panel>
                 <Header as="h3">{tagline}</Header>
-            </Segment>
+            </Panel>
             {icons}
             <p>{overview}</p>
             <Genres>
-                {genres.map(genre => (
-                    <Button basic inverted key={genre.id} color="red">
-                        {genre.name}
-                    </Button>
-                ))}
+                <ButtonToolbar aria-label="Button group with links to all trailers and videos">
+                    <ButtonGroup aria-label="Link to trailers and video.">
+                        {genres.map(genre => (
+                            <Button variant="dark" key={genre.id}>{genre.name}</Button>
+                        ))}
+                    </ButtonGroup>
+                </ButtonToolbar>
             </Genres>
         </MovieDetails>
     );
@@ -86,7 +91,7 @@ const Icons = styled.div`
             color: #EA3530;
         }
     }
-    i {
+    svg {
         transition: .2s ease-in;
         :hover {
             font-size: calc(12px + 3vw);

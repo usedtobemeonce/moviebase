@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { Header } from 'semantic-ui-react';
+// import { Header } from 'semantic-ui-react';
 
-export default styled(Header)`
+export default styled.div`
     color: white !important;
     margin: 10px 0;
     ${props => props.big && css`

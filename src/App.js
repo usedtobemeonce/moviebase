@@ -14,6 +14,7 @@ import Search from "./components/Search/Search";
 import SearchResults from './components/Search/SearchResults';
 import Home from './components/Home/Home';
 import useMedia from './hooks/useMedia';
+import './FontAwesomeIcons';
 
 const app = props => {
   const isSmallScreen = useMedia('(max-width: 900px)');
@@ -34,7 +35,7 @@ const app = props => {
       <Route exact path="/popular" component={Popular} {...props} />
       <Route exact path='/movie/:movieId' component={Movie} {...props} />
       <Route exact path='/upcomming' component={Upcomming} {...props} />
-      <Redirect to="/" />
+      <Redirect exact to="/" />
     </Switch>
   );
 

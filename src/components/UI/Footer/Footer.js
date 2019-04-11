@@ -1,9 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from 'semantic-ui-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Header from '../Header';
 import CustomLink from '../CustomLink';
+
+export default function () {
+    return (
+        <Footer>
+            <FooterMenuWrapper>
+                <FooterMenu>
+                    <CustomLink to="/">About</CustomLink>
+                    <CustomLink to="/">Contacts</CustomLink>
+                    <CustomLink to="/">FAQ</CustomLink>
+                </FooterMenu>
+                <FooterSocialMedia>
+                    <Header>Follow us on social media</Header>
+                    <SocialMediaLinks>
+                        <FontAwesomeIcon fixedWidth size="lg" icon={['fab', 'facebook']} />
+                        <FontAwesomeIcon fixedWidth size="lg" icon={['fab', 'instagram']} />
+                        <FontAwesomeIcon fixedWidth size="lg" icon={['fab', 'twitter']} />
+                        <FontAwesomeIcon fixedWidth size="lg" icon={['fab', 'youtube']} />
+                    </SocialMediaLinks>
+                </FooterSocialMedia>
+            </FooterMenuWrapper>
+            <Header>moviebase © 2019</Header>
+        </Footer>
+    );
+}
 
 const Footer = styled.footer`
     grid-area: footer;
@@ -46,28 +70,10 @@ const FooterSocialMedia = styled.div`
 
 const SocialMediaLinks = styled.div`
     display: flex;
+    justify-content: center;
+    svg {
+        :hover {
+            color: #ea3530;
+        }
+    }
 `;
-
-export default function () {
-    return (
-        <Footer>
-            <FooterMenuWrapper>
-                <FooterMenu>
-                    <CustomLink to="/">About</CustomLink>
-                    <CustomLink to="/">Contacts</CustomLink>
-                    <CustomLink to="/">FAQ</CustomLink>
-                </FooterMenu>
-                <FooterSocialMedia>
-                    <Header>Follow us on social media</Header>
-                    <SocialMediaLinks>
-                        <CustomLink><Icon name="facebook official" size="big" /></CustomLink>
-                        <CustomLink><Icon name="instagram" size="big" /></CustomLink>
-                        <CustomLink><Icon name="twitter" size="big" /></CustomLink>
-                        <CustomLink><Icon name="youtube" size="big" /></CustomLink>
-                    </SocialMediaLinks>
-                </FooterSocialMedia>
-            </FooterMenuWrapper>
-            <Header>moviebase © 2019</Header>
-        </Footer>
-    );
-}

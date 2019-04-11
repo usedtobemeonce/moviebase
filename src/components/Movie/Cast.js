@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import Header from '../UI/Header';
 import Image from '../UI/Image/Image';
 import CustomLink from '../UI/CustomLink';
+import Panel from '../UI/Panel/Panel';
 
 const cast = ({ className, cast }) => {
 
@@ -29,18 +29,15 @@ const cast = ({ className, cast }) => {
         cast.slice(0, showCastCount).map(actor => (
             <React.Fragment key={actor.id}>
                 <StyledImageCol>
-                    <Image
-                        size="mini"
-                        avatar
-                        src={`https://image.tmdb.org/t/p/w45${actor.profile_path}`} />
+                    <Image src={`https://image.tmdb.org/t/p/w45${actor.profile_path}`} />
                 </StyledImageCol>
-                <StyledNameCol as="h3">
+                <StyledNameCol>
                     <Link to="/">{actor.name}</Link>
                 </StyledNameCol>
-                <StyledAs as="h3">
+                <StyledAs>
                     {' '}-{' '}
                 </StyledAs>
-                <StyledCharacterCol as="h3">
+                <StyledCharacterCol>
                     {actor.character}
                 </StyledCharacterCol>
             </React.Fragment>
@@ -56,7 +53,7 @@ const cast = ({ className, cast }) => {
                     : `Showing - ${showCastCount}. Click to show all ${cast.length} actors.`
                 }
             </CustomLink>
-            <StyledCast inverted raised>
+            <StyledCast>
                 {allCast}
             </StyledCast>
         </div>
@@ -65,7 +62,7 @@ const cast = ({ className, cast }) => {
 
 export default cast;
 
-const StyledCast = styled(Segment)`
+const StyledCast = styled(Panel)`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

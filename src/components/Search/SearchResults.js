@@ -15,6 +15,7 @@ export default function (props) {
 
     const [movies, setMovies] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
+    const [totalResults, setTotalResults] = useState(0);
     const { page, pageChangedByApp, searchTitle } = state;
 
     useEffect(() => {
@@ -61,6 +62,7 @@ export default function (props) {
             }
             data.results.sort((a, b) => parseFloat(b.popularity) - parseFloat(a.popularity));
             setTotalPages(data.total_pages);
+            setTotalResults(data.total_results);
             setMovies(data.results);
         } catch (err) {
             console.error('Error searching movies', err);
@@ -75,6 +77,7 @@ export default function (props) {
                 isSearch={true}
                 moviesList={movies}
                 totalPages={totalPages}
+                totalResults={totalResults}
                 page={page}
                 {...props}
             />

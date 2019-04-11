@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
-import { Button, Icon } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import menuItems from './menuItems';
 import Context from '../../state/context';
 import Backdrop from '../UI/Backdrop/Backdrop';
 
-export default ({ className, isSmallScreen }) => {
+export default ({ className, isSmallScreen, location }) => {
     const { state, dispatch } = useContext(Context);
     const { isSideBarOpen } = state;
 
@@ -15,7 +16,11 @@ export default ({ className, isSmallScreen }) => {
         isSmallScreen && hideSideBar();
     }
 
-    const handleMenuItemClick = () => {
+    const handleMenuItemClick = link => {
+        if (location.pathname !== link) {
+            dispatch({ type: 'CHANGE_PAGE', payload: 1 });
+            dispatch({ type: 'CHANGE_PAGE_BY', payload: true });
+        }
         isSmallScreen && hideSideBar();
     }
 
@@ -34,16 +39,17 @@ export default ({ className, isSmallScreen }) => {
                         {menuItems.map(item =>
                             <StyledMenuItem
                                 key={item.id}
-                                onClick={handleMenuItemClick}
-                                to={item.link}
-                            >
-                                <Icon name={item.icon} style={{ marginRight: '24px' }} />
+                                onClick={() => handleMenuItemClick(item.link)}
+                                exact
+                                activeClassName="is-active"
+                                to={item.link}>
+                                <FontAwesomeIcon fixedWidth icon={item.icon} style={{ marginRight: '24px' }} />
                                 {' '}
                                 {item.text}
                             </StyledMenuItem>
                         )}
                     </StyledMenu>
-                    <Button color="red">Sign In</Button>
+                    <Button variant="danger"><FontAwesomeIcon icon="sign-in-alt" /> Sign In</Button>
                 </SideBarWrapper>
             </SideBar>
         </>
@@ -94,15 +100,21 @@ const StyledMenu = styled.div`
     margin: 10px 0;
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, .5);
+    .is-active {
+        color: #ea3530;
+        background-color: rgba(67, 90, 111, 0.3);
+    }
 `;
 
-const StyledMenuItem = styled(Link)`
+const StyledMenuItem = styled(NavLink)`
     display: block;
     padding: 15px 24px;
     color: white;
     font-size: 16px;
+    text-decoration: none !important;
     :hover {
         color: #ea3530;
-        background-color: rgba(67, 90, 111, 0.06);
+        background-color: rgba(67, 90, 111, 0.5);
+        text-decoration: none !important;
     }
 `;

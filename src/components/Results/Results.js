@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import Context from '../../state/context';
 import Header from '../UI/Header';
-import Pagination from '../UI/Pagination';
+import Pagination from '../UI/Pagination/Pagination';
 import Grid from '../UI/MovieGrid/Grid';
 
-export default ({ resultsTitle, resultsSubtitle, moviesList, totalPages, history, page }) => {
+export default ({ resultsTitle, resultsSubtitle, moviesList, totalPages, totalResults, history, page }) => {
 
     const { dispatch } = useContext(Context);
 
@@ -15,7 +15,7 @@ export default ({ resultsTitle, resultsSubtitle, moviesList, totalPages, history
         history.push(`/movie/${itemId}`);
     }
 
-    const handlePageChange = (e, { activePage }) => {
+    const handlePageChange = activePage => {
         dispatch({ type: 'CHANGE_PAGE', payload: activePage });
         dispatch({ type: 'CHANGE_PAGE_BY', payload: true });
     }
@@ -23,11 +23,15 @@ export default ({ resultsTitle, resultsSubtitle, moviesList, totalPages, history
     return (
         <Container>
             <StyledHeader>
-                <Header big as="h1">{resultsTitle}</Header>
-                <Header as="h3">{resultsSubtitle}</Header>
+                <Header big>{resultsTitle}</Header>
+                <Header>{resultsSubtitle}</Header>
             </StyledHeader>
             <Grid items={moviesList} onItemClicked={handleItemClicked} />
-            <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
+            <Pagination
+                page={page}
+                totalPages={totalPages}
+                totalResults={totalResults}
+                onChange={handlePageChange} />
         </Container>
     )
 }

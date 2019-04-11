@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Button } from 'semantic-ui-react';
 
-import EmbeddedPlayer from '../UI/VideoPlayer/EmbeddedPlayer';
+import YoutubePlayer from '../UI/VideoPlayer/YoutubePlayer';
 import Header from '../UI/Header';
+import Pagination from '../UI/Pagination/Pagination';
 
 export default ({ movieVideos, className }) => {
 
@@ -15,33 +14,20 @@ export default ({ movieVideos, className }) => {
         }
     }, [movieVideos]);
 
+    const handlePageChanged = page => {
+        setMovieVideoId(movieVideos[page].key);
+    }
+
     let content = null;
     if (movieVideoId) {
         content = (
             <div className={className}>
                 <Header as="h2">Trailers and videos</Header>
-                <EmbeddedPlayer movieVideoId={movieVideoId} />
-                <VideoButtons fluid color="black">
-                    {movieVideos.map((movieVideo, index) => (
-                        <VideoButton
-                            key={index}
-                            onClick={() => setMovieVideoId(movieVideo.key)}
-                        >
-                            {index + 1}
-                        </VideoButton>
-                    ))}
-                </VideoButtons>
+                <YoutubePlayer movieVideoId={movieVideoId} />
+                <Pagination totalPages={movieVideos.length} onChange={handlePageChanged} />
             </div>
         );
     }
 
     return (content);
 }
-
-const VideoButtons = styled(Button.Group)`
-    flex-wrap: wrap;
-`;
-
-const VideoButton = styled(Button)`
-    flex: none !important;
-`;

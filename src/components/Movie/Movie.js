@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { Loader } from 'semantic-ui-react'
+// import { Loader } from 'semantic-ui-react'
 
 import Image from '../UI/Image/Image';
 import Video from './Video';
@@ -99,7 +99,8 @@ export default function ({ match, history }) {
         }
     }
 
-    let content = <Loader active size='medium' />;
+    // let content = <Loader active size='medium' />;
+    let content = null;
 
     if (movieDetails) {
         content = (

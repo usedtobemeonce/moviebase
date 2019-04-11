@@ -27,7 +27,11 @@ export default function (props) {
     return (
         <Grid>
             {items.map(item => {
-                return <GridItem key={item.id} item={item} onItemClicked={handleItemClicked} />
+                return <GridItem
+                    key={item.id}
+                    item={item}
+                    onItemClicked={handleItemClicked}
+                />
             })}
         </Grid>
     );

@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Input, Icon } from 'semantic-ui-react';
 import queryString from 'query-string';
 
 import Context from '../../state/context';
+import Input from '../UI/Input/Input';
 
 export default (props) => {
     const { className, history, location } = props;
@@ -38,28 +37,13 @@ export default (props) => {
     }
 
     return (
-        <SearchField
-            icon
+        <Input
             className={className}
-            size="large"
-            placeholder='Search...'
+            placeholder="Search..."
+            aria-label="search"
             value={title}
             onChange={handleChange}
-            onKeyPress={handleKeyPress} >
-            <input />
-            <Icon name='search' />
-        </SearchField>
+            onKeyPress={handleKeyPress}
+        />
     );
 }
-
-
-const SearchField = styled(Input)`
-    input {
-        color: white !important;
-        border-color: #555 !important;
-        background-color: #212121 !important;
-    }
-    ${Icon} {
-        color: grey !important;
-    }
-`;

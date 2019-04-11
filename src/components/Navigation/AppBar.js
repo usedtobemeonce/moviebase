@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Logo from './Logo';
 import Search from "../Search/Search";
@@ -14,7 +15,9 @@ export default (props) => {
             {isSmallScreen && <BurgerButton style={{ gridArea: 'burgerButton' }} />}
             <Logo />
             {!isSmallScreen && <StyledSearch style={{ gridArea: 'search' }} {...props} />}
-            {!isSmallScreen && <SignInButton color="red"><Icon name="sign in" /> Sign-In</SignInButton>}
+            {!isSmallScreen &&
+                <SignInButton variant="danger"><FontAwesomeIcon icon="sign-in-alt" /> Sign-In</SignInButton>
+            }
         </AppBar>
     )
 }

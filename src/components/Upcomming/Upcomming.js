@@ -13,6 +13,7 @@ export default props => {
     const UPCOMMING_MOVIES_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`;
     const [movies, setMovies] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
+    const [totalResults, setTotalResults] = useState(0);
     const { state, dispatch } = useContext(Context);
     const { page, pageChangedByApp } = state;
 
@@ -36,6 +37,7 @@ export default props => {
             const { data } = await axios.get(url);
             if (!isUnmounted) {
                 setTotalPages(data.total_pages);
+                setTotalResults(data.total_results);
                 setMovies(data.results);
             }
         } catch (err) {
@@ -50,6 +52,7 @@ export default props => {
                 resultsSubtitle={'Latest & Greatest'}
                 moviesList={movies}
                 totalPages={totalPages}
+                totalResults={totalResults}
                 page={page}
                 {...props}
             />
