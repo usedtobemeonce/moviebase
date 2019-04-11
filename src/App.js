@@ -11,7 +11,7 @@ import Popular from './pages/Popular';
 import Movie from './pages/Movie';
 import Upcomming from './pages/Upcomming';
 import Search from "./components/search/Search";
-import SearchResults from './pages/searchResults';
+import SearchResults from './pages/SearchResults';
 import Home from './pages/Home';
 import useMedia from './hooks/useMedia';
 import './FontAwesomeIcons';
