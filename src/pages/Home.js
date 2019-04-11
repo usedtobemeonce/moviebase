@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import Context from '../../state/context';
-import Header from '../UI/Header';
-import Carousel from '../UI/Carousel/Carousel';
-import BANNER_BACKGROUND_IMAGE from '../../assets/images/home_banner.jpg';
-import Button from '../UI/Button/Button';
+import Context from '../state/context';
+import Header from '../components/shared/Header';
+import Carousel from '../components/shared/Carousel/Carousel';
+import BANNER_BACKGROUND_IMAGE from '../assets/images/home_banner.jpg';
+import Button from '../components/shared/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const home = props => {
@@ -76,6 +76,10 @@ const home = props => {
                 </Button>
             </Banner>
             <StyledSection>
+                <Header middle>In Theaters Now</Header>
+                <Header>
+                    Most popular movies that are currently played in theaters. Click on a movie to get more details.
+                </Header>
                 <Carousel movies={nowPlayingMovies} onClick={handleCarouselItemClick} />
             </StyledSection>
         </Home>
@@ -87,10 +91,6 @@ export default home;
 const Home = styled.div`
     display: flex;
     flex-direction: column;
-
-    /* .carousel {
-        padding: 0 10%;
-    } */
 
     button { 
         margin-top: 30px;

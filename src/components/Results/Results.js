@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import Context from '../../state/context';
-import Header from '../UI/Header';
-import Pagination from '../UI/Pagination/Pagination';
-import Grid from '../UI/MovieGrid/Grid';
+import Header from '../shared/Header';
+import Pagination from '../shared/Pagination/Pagination';
+import Grid from '../shared/MovieGrid/Grid';
 
 export default ({ resultsTitle, resultsSubtitle, moviesList, totalPages, totalResults, history, page }) => {
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import Table from 'react-bootstrap/Table';
+import { Table } from 'react-bootstrap';
 
-import Header from '../UI/Header';
+import Header from '../../components/shared/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { numberWithCommas } from '../../util/helper';
 

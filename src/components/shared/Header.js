@@ -7,4 +7,12 @@ export default styled.div`
         font-weight: 700;
         font-size: calc(12px + 2.5vw);
     `}
+    ${props => props.middle && css`
+        font-weight: 700;
+        font-size: calc(12px + 1.5vw);
+    `}
+    ${props => props.normal && css`
+        font-weight: 400;
+        font-size: calc(12px + .5vw);
+    `}
 `;

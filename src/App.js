@@ -7,12 +7,12 @@ import reducer from './state/reducer';
 import AppBar from "./components/Navigation/AppBar";
 import SideBar from './components/Navigation/SideBar';
 import Footer from "./components/UI/Footer/Footer";
-import Popular from './components/Popular/Popular';
-import Movie from './components/Movie/Movie';
-import Upcomming from './components/Upcomming/Upcomming';
+import Popular from './pages/Popular';
+import Movie from './pages/movie/Movie';
+import Upcomming from './pages/Upcomming';
 import Search from "./components/Search/Search";
-import SearchResults from './components/Search/SearchResults';
-import Home from './components/Home/Home';
+import SearchResults from './pages/SearchResults';
+import Home from './pages/Home';
 import useMedia from './hooks/useMedia';
 import './FontAwesomeIcons';
 

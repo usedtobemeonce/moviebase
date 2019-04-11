@@ -21,14 +21,16 @@ const carousel = props => {
         >
             {movies.map(movie => (
                 <Carousel.Item key={movie.id} onClick={() => handleCarouselItemClick(movie.id)}>
-                    <img
-                        className="d-block w-100"
-                        src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-                        alt="First slide"
-                    />
+                    <CarouselImage>
+                        <img
+                            className="d-block w-100"
+                            src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                            alt="First slide"
+                        />
+                    </CarouselImage>
                     <StyledCarouseCaption>
                         <Header big>{movie.title}</Header>
-                        <Header>{movie.overview.split(' ').slice(0, 15).join(' ')}...</Header>
+                        <Header normal>{movie.overview.split(' ').slice(0, 15).join(' ')}...</Header>
                     </StyledCarouseCaption>
                 </Carousel.Item>
             ))}
@@ -42,10 +44,17 @@ const StyledCarousel = styled(Carousel)`
     :hover {
         cursor: pointer;
         img {
-            -webkit-filter: blur(2px);
-            filter: blur(2px);
-            transition: .3s filter linear;
+            filter: blur(0);
+            transform: scale(1);
         }
+    }
+`;
+
+const CarouselImage = styled.div`
+    img {
+        transition: transform 1s, filter 2s ease-in-out;
+        filter: blur(2px);
+        transform: scale(1.2);
     }
 `;
 
@@ -54,6 +63,10 @@ const StyledCarouseCaption = styled(Carousel.Caption)`
 
 
     ${Header} {
+        text-shadow: 0px 0px 20px #000;
+    }
+
+    p {
         text-shadow: 0px 0px 20px #000;
     }
 

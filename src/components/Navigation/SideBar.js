@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import menuItems from './menuItems';
@@ -40,8 +40,6 @@ export default ({ className, isSmallScreen, location }) => {
                             <StyledMenuItem
                                 key={item.id}
                                 onClick={() => handleMenuItemClick(item.link)}
-                                exact
-                                activeClassName="is-active"
                                 to={item.link}>
                                 <FontAwesomeIcon fixedWidth icon={item.icon} style={{ marginRight: '24px' }} />
                                 {' '}
@@ -108,7 +106,7 @@ const StyledMenu = styled.div`
     }
 `;
 
-const StyledMenuItem = styled(NavLink)`
+const StyledMenuItem = styled(Link)`
     display: block;
     padding: 15px 24px;
     color: white;
@@ -116,7 +114,7 @@ const StyledMenuItem = styled(NavLink)`
     text-decoration: none !important;
     :hover {
         color: #ea3530;
-        background-color: rgba(67, 90, 111, 0.5);
+        background-color: rgba(67, 90, 111, 0.1);
         text-decoration: none !important;
     }
 `;

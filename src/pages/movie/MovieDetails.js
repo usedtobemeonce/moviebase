@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Button, ButtonToolbar, ButtonGroup } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Panel from '../UI/Panel/Panel';
+import Panel from '../../components/shared/Panel/Panel';
 
-import Header from '../UI/Header';
+import Header from '../../components/shared/Header';
 
 export default ({ className, title, externalIds, tagline, genres, overview }) => {
 
