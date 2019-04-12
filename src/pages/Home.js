@@ -17,13 +17,21 @@ const home = props => {
     const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
     const GET_NOW_PLAYING_MOVIES_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`;
     const TOM_CRUISE_HIGHEST_RANKED = `https://api.themoviedb.org/3/discover/movie?with_genres=878&with_cast=500&sort_by=vote_average.desc&api_key=${API_KEY}`;
+    const POPULAR_KIDS_MOVIES = `https://api.themoviedb.org/3/discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc&api_key=${API_KEY}`;
     const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
     const [tomCruiseMovies, setTomCruisMovies] = useState([]);
+    const [kidsMovies, setKidsMovies] = useState([]);
+    const [kidsMoviesImages, setKidsMoviesImages] = useState([]);
     const { dispatch } = useContext(Context);
 
     useEffect(() => {
         getNowPlayingMovies();
         getTomCruiseMovies();
+        getKidsMovies();
+
+        return () => {
+            isUnmounted = true;
+        }
     }, []);
 
     const getNowPlayingMovies = async () => {
@@ -33,10 +41,6 @@ const home = props => {
                 return;
             }
             setNowPlayingMovies(data.results);
-
-            return () => {
-                isUnmounted = true;
-            }
         } catch (err) {
             console.error('Error getting now playing movies', err);
         }
@@ -49,13 +53,35 @@ const home = props => {
                 return;
             }
             setTomCruisMovies(data.results);
-
-            return () => {
-                isUnmounted = true;
-            }
         } catch (err) {
             console.error('Error getting actor movies', err);
         }
+    }
+
+    const getKidsMovies = async () => {
+        try {
+            const { data } = await axios.get(POPULAR_KIDS_MOVIES);
+            if (isUnmounted) {
+                return;
+            }
+            setKidsMovies(data.results);
+            handleKidsMovies(data.results);
+        } catch (err) {
+            console.error('Error getting actor movies', err);
+        }
+    }
+
+    const handleKidsMovies = kidsMovies => {
+        console.log(kidsMovies);
+        const posters = kidsMovies.map(movie => {
+            return {
+                original: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+                thumbnail: `https://image.tmdb.org/t/p/w300${movie.poster_path}`,
+            }
+        });
+        setKidsMoviesImages(posters);
+
+        console.log(posters);
     }
 
     const handleCarouselItemClick = itemId => {
@@ -76,6 +102,7 @@ const home = props => {
                     <FontAwesomeIcon icon="arrow-alt-circle-right" /> Find popular
                 </Button>
             </Banner>
+
             <StyledSection>
                 <Header middle>In Theaters Now</Header>
                 <Header>
@@ -83,6 +110,7 @@ const home = props => {
                 </Header>
                 <Carousel movies={nowPlayingMovies} onClick={handleCarouselItemClick} />
             </StyledSection>
+
             <StyledSection>
                 <Header middle>Top 4 of Tom Cruise's highest ranked science fiction movies</Header>
                 <Header>Did you know?</Header>
@@ -97,6 +125,11 @@ const home = props => {
                         />
                     ))}
                 </StyledCardGroup>
+            </StyledSection>
+
+            <StyledSection>
+                <Header middle>Have you seen how kids movies are ranked?</Header>
+                <Carousel movies={kidsMovies} onClick={handleCarouselItemClick} />
             </StyledSection>
         </Home>
     );
