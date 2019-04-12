@@ -21,7 +21,6 @@ const home = props => {
     const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
     const [tomCruiseMovies, setTomCruisMovies] = useState([]);
     const [kidsMovies, setKidsMovies] = useState([]);
-    const [kidsMoviesImages, setKidsMoviesImages] = useState([]);
     const { dispatch } = useContext(Context);
 
     useEffect(() => {
@@ -65,23 +64,9 @@ const home = props => {
                 return;
             }
             setKidsMovies(data.results);
-            handleKidsMovies(data.results);
         } catch (err) {
             console.error('Error getting actor movies', err);
         }
-    }
-
-    const handleKidsMovies = kidsMovies => {
-        console.log(kidsMovies);
-        const posters = kidsMovies.map(movie => {
-            return {
-                original: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-                thumbnail: `https://image.tmdb.org/t/p/w300${movie.poster_path}`,
-            }
-        });
-        setKidsMoviesImages(posters);
-
-        console.log(posters);
     }
 
     const handleCarouselItemClick = itemId => {
