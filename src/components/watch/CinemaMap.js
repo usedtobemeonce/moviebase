@@ -6,6 +6,7 @@ import GoogleMapDarkStyle from './GoogleMapDarkStyle';
 
 
 const CinemaMap = withScriptjs(withGoogleMap((props) => {
+    let isUnmounted = false;
     const [map, setMap] = useState(null);
     const [markers, setMarkers] = useState(null);
     const [selectedMarkerId, setSelectedMarkerId] = useState(false);
@@ -22,14 +23,20 @@ const CinemaMap = withScriptjs(withGoogleMap((props) => {
 
     useEffect(() => {
         getMyLocation();
+
+        return () => {
+            isUnmounted = true;
+        }
     }, []);
 
     const getMyLocation = () => {
         navigator.geolocation.getCurrentPosition((position) => {
-            setMyLocation({
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-            });
+            if (isUnmounted) {
+                setMyLocation({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                });
+            }
         }, error => {
             console.error('Error locating your position', error);
             switch (error.code) {
