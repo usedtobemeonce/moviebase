@@ -17,7 +17,7 @@ const carousel = props => {
             fade
             keyboard
             className={className}
-            indicators={false}
+        // indicators={false}
         >
             {movies.map(movie => (
                 <Carousel.Item key={movie.id} onClick={() => handleCarouselItemClick(movie.id)}>

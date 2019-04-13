@@ -111,6 +111,13 @@ const CinemaMap = withScriptjs(withGoogleMap((props) => {
             onTilesLoaded={getNearbyCinemas}
             ref={onMapMounted}
             defaultOptions={{
+                fullscreenControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                zoomControl: false,
+                streetViewControl: false,
+                overviewMapControl: false,
+                rotateControl: false,
                 styles: GoogleMapDarkStyle
             }}
             defaultCenter={{ lat: myLocation.latitude, lng: myLocation.longitude }}
