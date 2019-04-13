@@ -4,7 +4,6 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
 
 import GoogleMapDarkStyle from './GoogleMapDarkStyle';
 
-const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const CinemaMap = withScriptjs(withGoogleMap((props) => {
     const [map, setMap] = useState(null);
@@ -140,6 +139,8 @@ const CinemaMap = withScriptjs(withGoogleMap((props) => {
 }));
 
 export default ({ isMarkerShown, myLocation }) => {
+    const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
     return (
         <CinemaMap
             isMarkerShown={isMarkerShown ? myLocation !== null : false}
