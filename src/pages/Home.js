@@ -39,7 +39,7 @@ const home = props => {
             if (isUnmounted) {
                 return;
             }
-            setNowPlayingMovies(data.results);
+            setNowPlayingMovies(data.results.splice(0, 5));
         } catch (err) {
             console.error('Error getting now playing movies', err);
         }
@@ -63,7 +63,7 @@ const home = props => {
             if (isUnmounted) {
                 return;
             }
-            setKidsMovies(data.results);
+            setKidsMovies(data.results.slice(0, 5));
         } catch (err) {
             console.error('Error getting actor movies', err);
         }

@@ -16,7 +16,7 @@ export default (props) => {
             <Logo />
             {!isSmallScreen && <StyledSearch style={{ gridArea: 'search' }} {...props} />}
             {!isSmallScreen &&
-                <SignInButton variant="danger"><FontAwesomeIcon icon="sign-in-alt" /> Sign-In</SignInButton>
+                <SignInButton variant="outline-danger"><FontAwesomeIcon icon="sign-in-alt" /> Sign-In</SignInButton>
             }
         </AppBar>
     )
