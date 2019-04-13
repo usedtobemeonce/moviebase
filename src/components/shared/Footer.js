@@ -45,13 +45,9 @@ const Footer = styled.footer`
 const FooterMenuWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    @media (max-width: 900px) {
-        flex-direction: column;
-    }
 `;
 
 const FooterMenu = styled.div`
-    justify-self: center;
     margin: 10px 50px;
     display: flex;
     flex-direction: column;

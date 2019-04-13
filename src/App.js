@@ -14,6 +14,7 @@ import Search from "./components/search/Search";
 import SearchResults from './pages/SearchResults';
 import Contacts from './pages/Contacts';
 import Home from './pages/Home';
+import Watch from './pages/Watch';
 import useMedia from './hooks/useMedia';
 import './FontAwesomeIcons';
 
@@ -36,6 +37,7 @@ const app = props => {
       <Route exact path="/popular" component={Popular} {...props} />
       <Route exact path='/movie/:movieId' component={Movie} {...props} />
       <Route exact path='/upcomming' component={Upcomming} {...props} />
+      <Route exact path='/watch' component={Watch} {...props} />
       <Route exact path='/contacts' component={Contacts} />
       <Redirect exact to="/" />
     </Switch>
